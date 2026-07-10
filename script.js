@@ -66,9 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 3. Countdown Timer (Target: Oct 10, 2026 11:30:00)
+  // 3. Countdown Timer (Target: March 14, 2027 12:00:00)
   // ==========================================
-  const targetDateStr = '2026-10-10T11:30:00+08:00';
+  const targetDateStr = '2027-03-14T12:00:00+08:00';
   const targetDate = new Date(targetDateStr).getTime();
 
   function updateCountdown() {
@@ -81,7 +81,7 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('hours').innerText = '00';
       document.getElementById('minutes').innerText = '00';
       document.getElementById('seconds').innerText = '00';
-      document.querySelector('.countdown-card-title').innerText = '🎉 婚禮進行中！祝福 Gary & Wendy 🎉';
+      document.querySelector('.countdown-card-title').innerText = '🎉 婚禮進行中！祝福 宏杰 & 汝菁 🎉';
       return;
     }
 

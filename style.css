@@ -1238,3 +1238,40 @@ body.has-texture .footer-copyright {
   }
 }
 
+/* ==========================================
+   🚇 Traffic Details Card Styling
+   ========================================== */
+.traffic-details-card {
+  grid-column: span 2;
+  text-align: left !important;
+}
+
+.traffic-section {
+  margin-top: 25px;
+}
+
+.traffic-section h4 {
+  color: var(--accent);
+  font-size: 1.1rem;
+  margin-bottom: 8px;
+  font-family: var(--font-serif);
+}
+
+.traffic-section p {
+  font-size: 0.95rem;
+  color: var(--text-muted);
+  line-height: 1.7;
+  margin-bottom: 8px;
+}
+
+body.has-texture .traffic-section p {
+  color: var(--text-dark);
+}
+
+@media (max-width: 900px) {
+  .traffic-details-card {
+    grid-column: span 1;
+  }
+}
+
+
