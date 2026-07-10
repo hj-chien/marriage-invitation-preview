@@ -236,12 +236,12 @@ img {
   height: auto;
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: center;
   text-align: center;
   color: white;
   overflow: hidden;
-  padding: 120px 20px 80px 20px;
+  padding: 13vh 20px 80px 20px;
 }
 
 .hero-bg-blur {
@@ -332,6 +332,18 @@ img {
   margin: 25px auto;
   opacity: 0.8;
   box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
+}
+
+.hero-invitation-subtitle {
+  font-family: var(--font-sans);
+  font-size: 0.8rem;
+  letter-spacing: 4px;
+  font-weight: 500;
+  color: var(--accent);
+  text-transform: uppercase;
+  display: block;
+  margin-bottom: 5px;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-invitation-title {
@@ -1324,19 +1336,19 @@ body.has-texture .traffic-section p {
    ========================================== */
 @media (max-width: 600px) {
   .hero-section {
-    padding: 80px 15px 40px 15px;
+    padding: 10vh 15px 40px 15px;
   }
   
   .hero-title {
     font-size: 2.2rem !important;
     letter-spacing: 1px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   
   .hero-subtitle {
     font-size: 0.8rem;
     letter-spacing: 4px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   
   .hero-date {
@@ -1348,50 +1360,39 @@ body.has-texture .traffic-section p {
     margin: 15px auto;
   }
   
-  .hero-invitation-title {
-    font-size: 1.4rem;
-    margin-bottom: 15px;
+  .hero-invitation-subtitle {
+    font-size: 0.75rem;
     letter-spacing: 2px;
+    margin-bottom: 4px;
   }
   
-  .hero-greeting p {
-    font-size: 0.88rem;
-    line-height: 1.7;
+  .hero-invitation-title {
+    font-size: 1.4rem;
     margin-bottom: 10px;
+    letter-spacing: 2px;
   }
   
   .hero-couple-signature {
     font-size: 0.95rem;
     margin-top: 15px;
-    margin-bottom: 20px;
+    margin-bottom: 15px;
   }
   
-  .hero-countdown-wrapper {
-    padding: 15px 10px;
-    margin-top: 15px;
-    width: 100%;
-  }
-  
-  .hero-countdown-title {
-    font-size: 0.8rem;
-    margin-bottom: 10px;
-    letter-spacing: 1px;
-  }
-  
-  .hero-content .countdown-grid {
+  /* Mobile styling for Countdown card on Page 2 */
+  .about-section .countdown-grid {
     gap: 6px;
   }
   
-  .hero-content .time-num {
+  .about-section .time-num {
     font-size: 1.8rem !important;
   }
   
-  .hero-content .time-label {
+  .about-section .time-label {
     font-size: 0.6rem !important;
     letter-spacing: 1px;
   }
   
-  .hero-content .countdown-item-divider {
+  .about-section .countdown-item-divider {
     font-size: 1.4rem !important;
     margin-bottom: 12px !important;
   }
