@@ -283,73 +283,46 @@ img {
 .hero-content {
   position: relative;
   z-index: 3;
-  padding: 0;
-  max-width: 800px;
+  padding: 0 20px;
+  max-width: 650px;
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
-}
-
-/* Premium Frosted Glass Invitation Card */
-.hero-card {
-  background: rgba(23, 30, 36, 0.75); /* Semi-transparent dark slate */
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-  border-radius: 12px;
-  padding: 50px 40px;
-  max-width: 600px;
-  width: 100%;
-  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
   margin: 0 auto;
-  text-align: center;
-  transition: all 0.3s ease;
-}
-
-body.has-texture .hero-card {
-  background: rgba(255, 255, 255, 0.85); /* Light glass card when texture active */
-  border: 1px solid rgba(23, 30, 36, 0.1);
-  color: var(--text-dark);
-  box-shadow: 0 10px 30px rgba(23, 30, 36, 0.1);
 }
 
 .hero-subtitle {
   font-family: var(--font-sans);
-  font-size: 0.9rem;
+  font-size: 0.95rem;
   letter-spacing: 6px;
   font-weight: 400;
   display: block;
   margin-bottom: 15px;
   text-transform: uppercase;
   color: var(--accent);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: 3.2rem; /* Sized down slightly for layout fit */
+  font-size: 3.4rem;
   font-weight: 300;
   letter-spacing: 2px;
   margin-bottom: 15px;
   line-height: 1.15;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.15);
-}
-
-body.has-texture .hero-title {
-  text-shadow: none;
+  color: white;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
 }
 
 .hero-date {
   font-family: var(--font-serif);
-  font-size: 1.15rem;
+  font-size: 1.2rem;
   letter-spacing: 4px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.9);
+  color: rgba(255, 255, 255, 0.95);
   margin-bottom: 0;
-}
-
-body.has-texture .hero-date {
-  color: var(--text-muted);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-card-divider {
@@ -357,41 +330,37 @@ body.has-texture .hero-date {
   width: 80px;
   background: var(--accent);
   margin: 25px auto;
-  opacity: 0.6;
+  opacity: 0.8;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .hero-invitation-title {
   font-family: var(--font-serif);
-  font-size: 1.8rem;
+  font-size: 1.9rem;
   color: var(--accent);
   margin-bottom: 20px;
   letter-spacing: 4px;
   font-weight: 400;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-greeting p {
-  font-size: 0.95rem;
-  line-height: 1.8;
+  font-size: 1rem;
+  line-height: 1.85;
   margin-bottom: 15px;
   letter-spacing: 1px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.85);
-}
-
-body.has-texture .hero-greeting p {
-  color: var(--text-dark);
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 .hero-couple-signature {
-  font-size: 1.1rem;
+  font-size: 1.15rem;
   margin-top: 25px;
   margin-bottom: 30px;
   letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.9);
-}
-
-body.has-texture .hero-couple-signature {
-  color: var(--text-dark);
+  color: rgba(255, 255, 255, 0.95);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
 }
 
 .hero-couple-signature span {
@@ -400,16 +369,16 @@ body.has-texture .hero-couple-signature {
 }
 
 .hero-countdown-wrapper {
-  background: rgba(255, 255, 255, 0.04);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background: rgba(23, 30, 36, 0.5); /* Semi-transparent glass for countdown block */
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 8px;
-  padding: 25px 20px;
+  padding: 25px 30px;
   margin-top: 25px;
-}
-
-body.has-texture .hero-countdown-wrapper {
-  background: rgba(23, 30, 36, 0.02);
-  border-color: rgba(23, 30, 36, 0.06);
+  width: 100%;
+  max-width: 480px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
 }
 
 .hero-countdown-title {
@@ -419,14 +388,22 @@ body.has-texture .hero-countdown-wrapper {
   color: var(--accent);
   text-transform: uppercase;
   font-weight: 500;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
-.hero-card .time-label {
-  color: rgba(255, 255, 255, 0.6);
+.hero-content .time-num {
+  color: var(--accent);
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
 }
 
-body.has-texture .hero-card .time-label {
-  color: var(--text-muted);
+.hero-content .time-label {
+  color: rgba(255, 255, 255, 0.7);
+  text-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+}
+
+.hero-content .countdown-item-divider {
+  color: rgba(255, 255, 255, 0.8);
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
 }
 
 /* Animations for Hero load */
@@ -1347,17 +1324,11 @@ body.has-texture .traffic-section p {
    ========================================== */
 @media (max-width: 600px) {
   .hero-section {
-    padding: 90px 15px 50px 15px;
-  }
-  
-  .hero-card {
-    padding: 30px 15px;
-    width: 100%;
-    border-radius: 8px;
+    padding: 80px 15px 40px 15px;
   }
   
   .hero-title {
-    font-size: 2rem !important;
+    font-size: 2.2rem !important;
     letter-spacing: 1px;
     margin-bottom: 10px;
   }
@@ -1398,6 +1369,7 @@ body.has-texture .traffic-section p {
   .hero-countdown-wrapper {
     padding: 15px 10px;
     margin-top: 15px;
+    width: 100%;
   }
   
   .hero-countdown-title {
@@ -1406,20 +1378,20 @@ body.has-texture .traffic-section p {
     letter-spacing: 1px;
   }
   
-  .hero-card .countdown-grid {
+  .hero-content .countdown-grid {
     gap: 6px;
   }
   
-  .hero-card .time-num {
+  .hero-content .time-num {
     font-size: 1.8rem !important;
   }
   
-  .hero-card .time-label {
+  .hero-content .time-label {
     font-size: 0.6rem !important;
     letter-spacing: 1px;
   }
   
-  .hero-card .countdown-item-divider {
+  .hero-content .countdown-item-divider {
     font-size: 1.4rem !important;
     margin-bottom: 12px !important;
   }
