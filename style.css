@@ -1512,5 +1512,88 @@ body.has-texture .traffic-section p {
   }
 }
 
+/* ==========================================
+   📱 Mobile Overrides for Hero Invitation Card
+   ========================================== */
+@media (max-width: 600px) {
+  .hero-section {
+    padding: 90px 15px 50px 15px;
+  }
+  
+  .hero-card {
+    padding: 30px 15px;
+    width: 100%;
+    border-radius: 8px;
+  }
+  
+  .hero-title {
+    font-size: 2rem !important;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+  }
+  
+  .hero-subtitle {
+    font-size: 0.8rem;
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+  }
+  
+  .hero-date {
+    font-size: 1rem;
+    letter-spacing: 2px;
+  }
+  
+  .hero-card-divider {
+    margin: 15px auto;
+  }
+  
+  .hero-invitation-title {
+    font-size: 1.4rem;
+    margin-bottom: 15px;
+    letter-spacing: 2px;
+  }
+  
+  .hero-greeting p {
+    font-size: 0.88rem;
+    line-height: 1.7;
+    margin-bottom: 10px;
+  }
+  
+  .hero-couple-signature {
+    font-size: 0.95rem;
+    margin-top: 15px;
+    margin-bottom: 20px;
+  }
+  
+  .hero-countdown-wrapper {
+    padding: 15px 10px;
+    margin-top: 15px;
+  }
+  
+  .hero-countdown-title {
+    font-size: 0.8rem;
+    margin-bottom: 10px;
+    letter-spacing: 1px;
+  }
+  
+  .hero-card .countdown-grid {
+    gap: 6px;
+  }
+  
+  .hero-card .time-num {
+    font-size: 1.8rem !important;
+  }
+  
+  .hero-card .time-label {
+    font-size: 0.6rem !important;
+    letter-spacing: 1px;
+  }
+  
+  .hero-card .countdown-item-divider {
+    font-size: 1.4rem !important;
+    margin-bottom: 12px !important;
+  }
+}
+
 
 
