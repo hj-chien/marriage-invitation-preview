@@ -81,7 +81,10 @@ document.addEventListener('DOMContentLoaded', () => {
       document.getElementById('hours').innerText = '00';
       document.getElementById('minutes').innerText = '00';
       document.getElementById('seconds').innerText = '00';
-      document.querySelector('.countdown-card-title').innerText = '🎉 婚禮進行中！祝福 宏杰 & 汝菁 🎉';
+      const countdownTitle = document.querySelector('.hero-countdown-title') || document.querySelector('.countdown-card-title');
+      if (countdownTitle) {
+        countdownTitle.innerText = '🎉 婚禮進行中！祝福 宏杰 & 汝菁 🎉';
+      }
       return;
     }
 

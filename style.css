@@ -282,7 +282,8 @@ body.dark-gray-bg .music-btn,
 /* Hero Section */
 .hero-section {
   position: relative;
-  height: 100vh;
+  min-height: 100vh;
+  height: auto;
   width: 100%;
   display: flex;
   align-items: center;
@@ -290,6 +291,7 @@ body.dark-gray-bg .music-btn,
   text-align: center;
   color: white;
   overflow: hidden;
+  padding: 120px 20px 80px 20px;
 }
 
 .hero-bg-blur {
@@ -302,7 +304,7 @@ body.dark-gray-bg .music-btn,
   background-position: center;
   filter: blur(25px);
   transform: scale(1.1);
-  opacity: 0.55;
+  opacity: 0.45; /* Lighter background blur opacity */
   z-index: 0;
 }
 
@@ -324,14 +326,42 @@ body.dark-gray-bg .music-btn,
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(to bottom, rgba(34,37,42,0.4) 0%, rgba(34,37,42,0.65) 100%);
+  background: linear-gradient(to bottom, rgba(34,37,42,0.15) 0%, rgba(34,37,42,0.35) 100%); /* Much lighter overlay for transparency */
+  z-index: 2;
 }
 
 .hero-content {
   position: relative;
-  z-index: 2;
-  padding: 0 20px;
+  z-index: 3;
+  padding: 0;
   max-width: 800px;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Premium Frosted Glass Invitation Card */
+.hero-card {
+  background: rgba(23, 30, 36, 0.75); /* Semi-transparent dark slate */
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  padding: 50px 40px;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 15px 35px rgba(0, 0, 0, 0.35);
+  margin: 0 auto;
+  text-align: center;
+  transition: all 0.3s ease;
+}
+
+body.has-texture .hero-card {
+  background: rgba(255, 255, 255, 0.85); /* Light glass card when texture active */
+  border: 1px solid rgba(23, 30, 36, 0.1);
+  color: var(--text-dark);
+  box-shadow: 0 10px 30px rgba(23, 30, 36, 0.1);
 }
 
 .hero-subtitle {
@@ -340,26 +370,113 @@ body.dark-gray-bg .music-btn,
   letter-spacing: 6px;
   font-weight: 400;
   display: block;
-  margin-bottom: 20px;
+  margin-bottom: 15px;
   text-transform: uppercase;
+  color: var(--accent);
 }
 
 .hero-title {
   font-family: var(--font-serif);
-  font-size: 4.5rem;
+  font-size: 3.2rem; /* Sized down slightly for layout fit */
   font-weight: 300;
   letter-spacing: 2px;
-  margin-bottom: 25px;
-  line-height: 1.1;
-  text-shadow: 0 2px 10px rgba(0,0,0,0.2);
+  margin-bottom: 15px;
+  line-height: 1.15;
+  text-shadow: 0 2px 10px rgba(0,0,0,0.15);
+}
+
+body.has-texture .hero-title {
+  text-shadow: none;
 }
 
 .hero-date {
   font-family: var(--font-serif);
-  font-size: 1.2rem;
+  font-size: 1.15rem;
   letter-spacing: 4px;
   font-weight: 300;
   color: rgba(255, 255, 255, 0.9);
+  margin-bottom: 0;
+}
+
+body.has-texture .hero-date {
+  color: var(--text-muted);
+}
+
+.hero-card-divider {
+  height: 1px;
+  width: 80px;
+  background: var(--accent);
+  margin: 25px auto;
+  opacity: 0.6;
+}
+
+.hero-invitation-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  color: var(--accent);
+  margin-bottom: 20px;
+  letter-spacing: 4px;
+  font-weight: 400;
+}
+
+.hero-greeting p {
+  font-size: 0.95rem;
+  line-height: 1.8;
+  margin-bottom: 15px;
+  letter-spacing: 1px;
+  font-weight: 300;
+  color: rgba(255, 255, 255, 0.85);
+}
+
+body.has-texture .hero-greeting p {
+  color: var(--text-dark);
+}
+
+.hero-couple-signature {
+  font-size: 1.1rem;
+  margin-top: 25px;
+  margin-bottom: 30px;
+  letter-spacing: 1.5px;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+body.has-texture .hero-couple-signature {
+  color: var(--text-dark);
+}
+
+.hero-couple-signature span {
+  font-weight: 600;
+  color: var(--accent);
+}
+
+.hero-countdown-wrapper {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  padding: 25px 20px;
+  margin-top: 25px;
+}
+
+body.has-texture .hero-countdown-wrapper {
+  background: rgba(23, 30, 36, 0.02);
+  border-color: rgba(23, 30, 36, 0.06);
+}
+
+.hero-countdown-title {
+  font-size: 0.9rem;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: var(--accent);
+  text-transform: uppercase;
+  font-weight: 500;
+}
+
+.hero-card .time-label {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+body.has-texture .hero-card .time-label {
+  color: var(--text-muted);
 }
 
 /* Animations for Hero load */
