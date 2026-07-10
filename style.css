@@ -1595,5 +1595,239 @@ body.has-texture .traffic-section p {
   }
 }
 
+/* ==========================================
+   📬 Interactive Envelope Opening Animation
+   ========================================== */
+
+/* Envelope Overlay Container */
+.envelope-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-dark); /* Match slate dark color */
+  z-index: 9999; /* Higher than all content */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+  transition: opacity 1s cubic-bezier(0.4, 0, 0.2, 1), 
+              visibility 1s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.has-texture .envelope-overlay {
+  background-image: url('assets/images/texture_grain.png');
+  background-color: var(--bg-light);
+  background-blend-mode: multiply;
+}
+
+.envelope-overlay.fade-out {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+/* Envelope Wrapper for 3D Perspective */
+.envelope-wrapper {
+  perspective: 1200px;
+  width: 90%;
+  max-width: 400px;
+  aspect-ratio: 3 / 4;
+}
+
+/* The Envelope Container */
+.envelope {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  background: var(--bg-card); /* Card white background */
+  border-radius: 8px;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+body.has-texture .envelope {
+  background-image: url('assets/images/texture_grain.png');
+  background-blend-mode: multiply;
+  box-shadow: 0 15px 35px rgba(23, 30, 36, 0.25);
+  border: 1px solid rgba(23, 30, 36, 0.1);
+}
+
+/* Base style for Flaps */
+.envelope-flap {
+  position: absolute;
+  left: 0;
+  width: 100%;
+  height: 50%;
+  background: #c3b4a2; /* Warm kraft-paper look */
+  z-index: 5;
+  transform-style: preserve-3d;
+  transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.08);
+}
+
+body.has-texture .envelope-flap {
+  background: var(--accent); /* Match champagne gold */
+}
+
+/* Top Flap */
+.flap-top {
+  top: 0;
+  transform-origin: top;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Bottom Flap */
+.flap-bottom {
+  bottom: 0;
+  transform-origin: bottom;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+  border-top: 1px solid rgba(0, 0, 0, 0.05);
+}
+
+/* Unfolding Rotations */
+.envelope-overlay.open .flap-top {
+  transform: rotateX(150deg);
+}
+
+.envelope-overlay.open .flap-bottom {
+  transform: rotateX(-150deg);
+}
+
+.envelope-overlay.open .envelope {
+  transform: scale(1.04);
+}
+
+/* Flap Inner Content */
+.flap-content {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+}
+
+.envelope-logo {
+  font-family: var(--font-serif);
+  font-size: 2.2rem;
+  color: white;
+  letter-spacing: 4px;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.envelope-tap-prompt {
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  color: white;
+  letter-spacing: 6px;
+  animation: envPulse 2.5s infinite;
+}
+
+@keyframes envPulse {
+  0%, 100% { opacity: 0.6; transform: scale(0.96); }
+  50% { opacity: 1; transform: scale(1); }
+}
+
+/* Envelope Card Body (Revealed) */
+.envelope-body {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--bg-card);
+  border-radius: 8px;
+  z-index: 1;
+}
+
+body.has-texture .envelope-body {
+  background-image: url('assets/images/texture_grain.png');
+  background-blend-mode: multiply;
+}
+
+.envelope-invitation-preview {
+  text-align: center;
+  padding: 20px;
+  color: var(--text-dark);
+}
+
+.env-date {
+  font-family: var(--font-sans);
+  font-size: 0.85rem;
+  letter-spacing: 4px;
+  color: var(--accent);
+  margin-bottom: 12px;
+}
+
+.env-title {
+  font-family: var(--font-serif);
+  font-size: 1.8rem;
+  font-weight: 400;
+  letter-spacing: 4px;
+  margin-bottom: 15px;
+}
+
+.env-names {
+  font-family: var(--font-serif);
+  font-size: 1.4rem;
+  font-weight: 500;
+  color: var(--text-dark);
+  letter-spacing: 2px;
+}
+
+/* Golden Wax Seal Button */
+.envelope-seal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
+  width: 72px;
+  height: 72px;
+  background: radial-gradient(circle, #e6c594 0%, #bfa17c 100%);
+  border: 2px solid #dfc49c;
+  color: white;
+  font-size: 2.2rem;
+  border-radius: 50%;
+  cursor: pointer;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  outline: none;
+}
+
+.envelope-seal:hover {
+  transform: translate(-50%, -50%) scale(1.08);
+  box-shadow: 0 10px 25px rgba(191, 161, 124, 0.5);
+}
+
+.seal-icon {
+  font-family: var(--font-serif);
+  line-height: 1;
+  display: block;
+  margin-top: -3px; /* vertical alignment */
+}
+
+/* Seal Fading out */
+.envelope-overlay.open .envelope-seal {
+  transform: translate(-50%, -50%) scale(0);
+  opacity: 0;
+  pointer-events: none;
+}
+
+
 
 

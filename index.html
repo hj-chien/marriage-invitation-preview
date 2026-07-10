@@ -15,6 +15,39 @@
 </head>
 <body>
 
+  <!-- Interactive Opening Envelope Overlay -->
+  <div id="envelope-overlay" class="envelope-overlay">
+    <div class="envelope-wrapper">
+      <div class="envelope">
+        <!-- Top Folded Flap -->
+        <div class="envelope-flap flap-top">
+          <div class="flap-content">
+            <span class="envelope-logo">H & R</span>
+          </div>
+        </div>
+        <!-- Center Card Body (Revealed) -->
+        <div class="envelope-body">
+          <div class="envelope-invitation-preview">
+            <p class="env-date">2027.03.13</p>
+            <h3 class="env-title">誠摯邀請</h3>
+            <p class="env-names">宏杰 ＆ 汝菁</p>
+          </div>
+        </div>
+        <!-- Bottom Folded Flap -->
+        <div class="envelope-flap flap-bottom">
+          <div class="flap-content">
+            <p class="envelope-tap-prompt">親啟</p>
+          </div>
+        </div>
+        
+        <!-- Golden Wax Seal Button -->
+        <button id="envelope-seal" class="envelope-seal" aria-label="打開喜帖">
+          <span class="seal-icon">囍</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
   <!-- Background Music Element -->
   <audio id="bg-music" loop>
     <source src="assets/music.mp3" type="audio/mp3">

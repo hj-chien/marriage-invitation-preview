@@ -36,20 +36,57 @@ document.addEventListener('DOMContentLoaded', () => {
 
   musicBtn.addEventListener('click', toggleMusic);
 
-  // Auto-play attempt on first user interaction
+  // Lock body scrolling initially for envelope opening animation
+  document.body.style.overflow = 'hidden';
+
+  // Auto-play attempt on first user interaction (general fallback)
   const startMusicOnInteraction = () => {
     if (!isPlaying) {
       toggleMusic();
-      // Remove event listeners after first trigger
-      document.removeEventListener('click', startMusicOnInteraction);
-      document.removeEventListener('scroll', startMusicOnInteraction);
-      document.removeEventListener('touchstart', startMusicOnInteraction);
+      removeInteractionListeners();
     }
   };
+
+  function removeInteractionListeners() {
+    document.removeEventListener('click', startMusicOnInteraction);
+    document.removeEventListener('scroll', startMusicOnInteraction);
+    document.removeEventListener('touchstart', startMusicOnInteraction);
+  }
 
   document.addEventListener('click', startMusicOnInteraction);
   document.addEventListener('scroll', startMusicOnInteraction);
   document.addEventListener('touchstart', startMusicOnInteraction);
+
+  // Envelope opening logic
+  const envelopeOverlay = document.getElementById('envelope-overlay');
+  const envelopeSeal = document.getElementById('envelope-seal');
+  
+  if (envelopeSeal && envelopeOverlay) {
+    envelopeSeal.addEventListener('click', (e) => {
+      e.stopPropagation();
+      envelopeOverlay.classList.add('open');
+      
+      // Play music directly on this seal click (satisfies user interaction rule)
+      if (!isPlaying) {
+        toggleMusic();
+      }
+      removeInteractionListeners();
+      
+      // Step 1: Wait for 3D unfold animation to play (1.5 seconds)
+      setTimeout(() => {
+        envelopeOverlay.classList.add('fade-out');
+      }, 1500);
+      
+      // Step 2: Wait for fade-out to finish (1.0 seconds) -> remove overlay and restore scroll
+      setTimeout(() => {
+        envelopeOverlay.style.display = 'none';
+        document.body.style.overflow = '';
+        
+        // Dispatch scroll event to trigger ScrollReveal animations on the page
+        window.dispatchEvent(new Event('scroll'));
+      }, 2500);
+    });
+  }
 
 
   // ==========================================
