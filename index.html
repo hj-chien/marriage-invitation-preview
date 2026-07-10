@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="zh-Hant">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Wedding Invitation | 我們的婚禮邀請函</title>
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Noto+Serif+TC:wght@300;400;600;700&family=Inter:wght@300;400;500;600&family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  
+  <!-- CSS Stylesheet -->
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- Background Music Element -->
+  <audio id="bg-music" loop>
+    <source src="assets/music.mp3" type="audio/mp3">
+    <!-- Fallback if browser doesn't support audio -->
+    您的瀏覽器不支援音樂播放。
+  </audio>
+
+  <!-- Audio Toggle Button (Glassmorphic) -->
+  <button id="music-btn" class="music-btn pulse" aria-label="播放/暫停音樂">
+    <svg class="music-icon icon-play" viewBox="0 0 24 24">
+      <path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z"/>
+    </svg>
+    <svg class="music-icon icon-pause hidden" viewBox="0 0 24 24">
+      <path d="M6 19h4V5h-4v14zm8-14v14h4V5h-4z"/>
+    </svg>
+  </button>
+
+  <!-- Floating Nav Bar -->
+  <nav class="glass-nav">
+    <div class="nav-container">
+      <a href="#hero" class="nav-logo">H & W</a>
+      <ul class="nav-links">
+        <li><a href="#about">我們</a></li>
+        <li><a href="#gallery">婚紗相簿</a></li>
+        <li><a href="#event">時間地點</a></li>
+        <li><a href="#guestbook">祝賀牆</a></li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Section 1: Hero Cover -->
+  <header id="hero" class="hero-section">
+    <div class="hero-bg" style="background-image: url('assets/images/photo1.png');"></div>
+    <div class="hero-overlay"></div>
+    <div class="hero-content">
+      <span class="hero-subtitle fade-in">SAVE THE DATE</span>
+      <h1 class="hero-title fade-in-delay-1">Gary & Wendy</h1>
+      <p class="hero-date fade-in-delay-2">2026.10.10 | SATURDAY</p>
+      
+      <!-- Scroll Down Indicator -->
+      <a href="#about" class="scroll-down-indicator" aria-label="向下捲動">
+        <svg class="chevron-down" viewBox="0 0 24 24">
+          <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
+        </svg>
+      </a>
+    </div>
+  </header>
+
+  <!-- Section 2: Invitation & Story -->
+  <section id="about" class="section about-section">
+    <div class="container container-narrow">
+      <div class="section-title-wrapper scroll-reveal">
+        <span class="section-subtitle">THE INVITATION</span>
+        <h2 class="section-title">誠摯邀請</h2>
+        <div class="title-divider"></div>
+      </div>
+      
+      <div class="about-text scroll-reveal">
+        <p class="greeting-para">
+          在春天的花開、夏天的微風、秋天的紅葉與冬天的初雪中，<br>
+          我們攜手走過了許多四季。<br>
+          如今，我們決定翻開生命的全新篇章。
+        </p>
+        <p class="greeting-para">
+          誠摯地邀請您，前來見證我們的婚禮，<br>
+          與我們一同分享這份特別的喜悅與溫馨。
+        </p>
+        <p class="couple-signature">
+          新郎 <span>廖加瑞 Gary</span> ＆ 新娘 <span>張文馨 Wendy</span> 敬邀
+        </p>
+      </div>
+
+      <!-- Live Countdown Card -->
+      <div class="countdown-card scroll-reveal">
+        <h3 class="countdown-card-title">距離婚宴還有</h3>
+        <div id="countdown" class="countdown-grid">
+          <div class="countdown-item">
+            <span id="days" class="time-num">00</span>
+            <span class="time-label">DAYS</span>
+          </div>
+          <div class="countdown-item-divider">:</div>
+          <div class="countdown-item">
+            <span id="hours" class="time-num">00</span>
+            <span class="time-label">HOURS</span>
+          </div>
+          <div class="countdown-item-divider">:</div>
+          <div class="countdown-item">
+            <span id="minutes" class="time-num">00</span>
+            <span class="time-label">MINS</span>
+          </div>
+          <div class="countdown-item-divider">:</div>
+          <div class="countdown-item">
+            <span id="seconds" class="time-num">00</span>
+            <span class="time-label">SECS</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 3: Photo Gallery -->
+  <section id="gallery" class="section gallery-section dark-gray-bg">
+    <div class="container">
+      <div class="section-title-wrapper scroll-reveal">
+        <span class="section-subtitle">GALLERY</span>
+        <h2 class="section-title">婚紗相簿</h2>
+        <div class="title-divider"></div>
+      </div>
+
+      <!-- Photo Carousel/Grid -->
+      <div class="gallery-container scroll-reveal">
+        <div class="gallery-grid">
+          <div class="gallery-item large" style="background-image: url('assets/images/photo1.png');">
+            <div class="gallery-hover-overlay">
+              <span class="gallery-hover-text">Love in the moment</span>
+            </div>
+          </div>
+          <div class="gallery-item" style="background-image: url('assets/images/photo2.png');">
+            <div class="gallery-hover-overlay">
+              <span class="gallery-hover-text">Hand in hand</span>
+            </div>
+          </div>
+          <div class="gallery-item" style="background-image: url('assets/images/photo3.png');">
+            <div class="gallery-hover-overlay">
+              <span class="gallery-hover-text">Together forever</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 4: Event & Map Details -->
+  <section id="event" class="section event-section">
+    <div class="container">
+      <div class="section-title-wrapper scroll-reveal">
+        <span class="section-subtitle">EVENT DETAILS</span>
+        <h2 class="section-title">婚宴資訊與交通</h2>
+        <div class="title-divider"></div>
+      </div>
+
+      <div class="event-grid">
+        <!-- Event Card -->
+        <div class="event-card scroll-reveal">
+          <div class="card-icon-wrapper">
+            <svg class="card-icon" viewBox="0 0 24 24">
+              <path d="M9 11H7v2h2v-2zm4 0h-2v2h2v-2zm4 0h-2v2h2v-2zm2-7h-1V2h-2v2H8V2H6v2H5c-1.11 0-1.99.9-1.99 2L3 20c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 16H5V9h14v11z"/>
+            </svg>
+          </div>
+          <h3>婚禮時間</h3>
+          <div class="event-card-divider"></div>
+          <p class="time-main">2026 年 10 月 10 日 (星期六)</p>
+          <p class="time-sub">中午 11:30 入席 | 12:00 正式開席</p>
+          
+          <!-- Calendar Button -->
+          <a href="https://calendar.google.com/calendar/render?action=TEMPLATE&text=Gary+%26+Wendy+%E5%A9%9A%E5%AE%B4&dates=20261010T033000Z/20261010T073000Z&details=%E8%AA%A0%E6%96%AC%E9%82%80%E8%AB%8B%E6%82%A8%E5%8F%83%E5%8A%A0%E6%88%91%E5%80%91%E7%9A%84%E5%A9%9A%E7%A6%AE%EF%BC%81&location=%E5%8F%B0%E5%8C%97%E5%90%9B%E6%82%85%E9%85%92%E5%BA%97+-+%E5%8F%B0%E5%8C%97%E5%B8%82%E4%BF%A1%E7%BE%A9%E5%8D%80%E6%9D%BE%E5%A3%BD%E8%B7%AF2%E8%99%9F" 
+             target="_blank" class="btn btn-outline" rel="noopener">
+            <svg class="btn-icon" viewBox="0 0 24 24">
+              <path d="M19 19H5V8h14v11zM16 12h-3v3h3v-3zm3-8h-1V2h-2v2H8V2H6v2H5c-1.11 0-2 .9-2 2v14c0 1.1.89 2 2 2h14c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2z"/>
+            </svg>
+            加入 Google 行事曆
+          </a>
+        </div>
+
+        <!-- Venue Card -->
+        <div class="event-card scroll-reveal">
+          <div class="card-icon-wrapper">
+            <svg class="card-icon" viewBox="0 0 24 24">
+              <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
+            </svg>
+          </div>
+          <h3>婚宴地點</h3>
+          <div class="event-card-divider"></div>
+          <p class="time-main">台北君悅酒店 3 樓凱悅廳</p>
+          <p class="time-sub">台北市信義區松壽路2號</p>
+          <p class="traffic-notice">🚗 備有免費室內特約停車場，用餐可折抵停車時數。</p>
+        </div>
+      </div>
+
+      <!-- Embedded Google Map -->
+      <div class="map-wrapper scroll-reveal">
+        <iframe 
+          title="Google Map of Venue"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3615.0028770275815!2d121.56064047605051!3d25.033968638289456!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3442abb60c7f212f%3A0x7d01306b9b32c253!2z5Y-w5YyX5ZCb5YWF6YWS5bqX Grand Hyatt Taipei!5e0!3m2!1szh-TW!2stw!4v1710000000000!5m2!1szh-TW!2stw" 
+          width="100%" 
+          height="450" 
+          style="border:0;" 
+          allowfullscreen="" 
+          loading="lazy" 
+          referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </section>
+
+  <!-- Section 5: Blessing Wall (Interactive Guestbook) -->
+  <section id="guestbook" class="section guestbook-section dark-gray-bg">
+    <div class="container container-narrow">
+      <div class="section-title-wrapper scroll-reveal">
+        <span class="section-subtitle">GUESTBOOK</span>
+        <h2 class="section-title">幸福祝賀牆</h2>
+        <div class="title-divider"></div>
+        <p class="section-desc-para">歡迎留下您對新人的祝福，您的祝賀會即時顯示在下方的祝福牆上！</p>
+      </div>
+
+      <!-- Input Form -->
+      <div class="guestbook-form-card scroll-reveal">
+        <form id="wish-form">
+          <div class="form-group">
+            <label for="guest-name">您的名字</label>
+            <input type="text" id="guest-name" required placeholder="例如：王小明 或 大學同學 Alice" maxlength="20">
+          </div>
+          <div class="form-group">
+            <label for="guest-wish">給新人的祝福語</label>
+            <textarea id="guest-wish" required placeholder="寫下對新人的溫馨祝福..." rows="4" maxlength="150"></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary">
+            <svg class="btn-icon" viewBox="0 0 24 24">
+              <path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/>
+            </svg>
+            送出祝福
+          </button>
+        </form>
+      </div>
+
+      <!-- Wish Messages Display (Masonry Grid Style) -->
+      <div class="wish-board scroll-reveal" id="wish-board">
+        <!-- Wish items dynamically added by JS -->
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <p class="footer-eng">G & W | 10.10.2026</p>
+    <p class="footer-ch">謝謝您參與我們的幸福時刻</p>
+    <p class="footer-copyright">&copy; 2026 Gary & Wendy. Created with Love.</p>
+  </footer>
+
+  <!-- Lightbox Modal for Gallery Images -->
+  <div id="lightbox" class="lightbox">
+    <span class="lightbox-close">&times;</span>
+    <img class="lightbox-content" id="lightbox-img" src="" alt="婚紗照放大圖">
+  </div>
+
+  <!-- Style/Texture Switcher Widget -->
+  <div id="texture-switcher" class="texture-switcher">
+    <button id="switcher-toggle" class="switcher-toggle" aria-label="切換材質">
+      <!-- Paint roller SVG -->
+      <svg class="switcher-icon" viewBox="0 0 24 24">
+        <path d="M19 8H5c-1.66 0-3 1.34-3 3v3c0 .55.45 1 1 1h1v6c0 1.1.9 2 2 2h8c1.1 0 2-.9 2-2v-6h1c.55 0 1-.45 1-1v-3c0-1.66-1.34-3-3-3zM6 19v-4h4v4H6zm10 0h-4v-4h4v4zm1-6H7v-3h10v3zm2-5h-2V5c0-1.1-.9-2-2-2H9c-1.1 0-2 .9-2 2v3H5c-1.1 0-2 .9-2 2v1H2c-.55 0-1-.45-1-1V5c0-1.66 1.34-3 3-3h14c1.66 0 3 1.34 3 3v3c0 .55-.45 1-1 1h-1v-1z"/>
+      </svg>
+    </button>
+    <div id="switcher-panel" class="switcher-panel hidden">
+      <h4>背景材質測試</h4>
+      <div class="switcher-buttons">
+        <button class="switcher-btn active" data-texture="none">無紋理 (純灰)</button>
+        <button class="switcher-btn" data-texture="grain">微粒卡紙</button>
+        <button class="switcher-btn" data-texture="linen">細緻麻布</button>
+        <button class="switcher-btn" data-texture="ribbed">條紋卡紙</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- JavaScript -->
+  <script src="script.js"></script>
+</body>
+</html>
