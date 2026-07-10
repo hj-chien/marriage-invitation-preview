@@ -3,6 +3,15 @@
    Theme: Texture Muted Gray & Champagne Gold
    ========================================== */
 
+@font-face {
+  font-family: 'DFPLingHui';
+  src: url('assets/fonts/DFPLingHui.ttf') format('truetype'),
+       url('assets/fonts/DFPLingHui.otf') format('opentype');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* Color Palette */
   --bg-light: #d8dee3;          /* Darker, more saturated cool slate gray */
