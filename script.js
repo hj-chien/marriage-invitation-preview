@@ -338,48 +338,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
-  // ==========================================
-  // 7. Background Texture Switcher Logic
-  // ==========================================
-  const switcherToggle = document.getElementById('switcher-toggle');
-  const switcherPanel = document.getElementById('switcher-panel');
-  const switcherBtns = document.querySelectorAll('.switcher-btn');
 
-  // Toggle Panel
-  switcherToggle.addEventListener('click', (e) => {
-    e.stopPropagation();
-    switcherPanel.classList.toggle('hidden');
-  });
-
-  // Close Panel when clicking outside
-  document.addEventListener('click', (e) => {
-    if (switcherPanel && !switcherPanel.classList.contains('hidden') && !switcherPanel.contains(e.target) && e.target !== switcherToggle) {
-      switcherPanel.classList.add('hidden');
-    }
-  });
-
-  // Switch Texture Function
-  switcherBtns.forEach(btn => {
-    btn.addEventListener('click', () => {
-      // Remove active class from all buttons
-      switcherBtns.forEach(b => b.classList.remove('active'));
-      // Add active class to clicked button
-      btn.classList.add('active');
-
-      const texture = btn.dataset.texture;
-
-      // Remove all background texture classes from body
-      document.body.classList.remove('bg-texture-grain', 'bg-texture-linen', 'bg-texture-ribbed', 'has-texture');
-
-      // Add appropriate class
-      if (texture !== 'none') {
-        document.body.classList.add(`bg-texture-${texture}`, 'has-texture');
-      }
-
-      // Close panel after select
-      switcherPanel.classList.add('hidden');
-    });
-  });
 
   // Initial Load of Wish Board
   renderWishes();
