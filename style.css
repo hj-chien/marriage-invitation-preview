@@ -5,20 +5,20 @@
 
 :root {
   /* Color Palette */
-  --bg-light: #f7f7f7;          /* Soft warm light gray */
-  --bg-medium: #ededed;         /* Slightly darker warm gray */
-  --bg-dark: #22252a;           /* Deep charcoal gray */
+  --bg-light: #d8dee3;          /* Darker, more saturated cool slate gray */
+  --bg-medium: #b0bbc2;         /* Saturated medium gray */
+  --bg-dark: #171e24;           /* Rich deep dark slate */
   --bg-card: #ffffff;           /* Crisp white for cards */
-  --text-dark: #2c2f35;         /* Elegant primary dark text */
-  --text-muted: #6b7078;        /* Muted gray for body text */
-  --text-light: #f7f7f7;        /* Muted light text for dark backgrounds */
+  --text-dark: #1b2226;         /* Deeper slate gray for text */
+  --text-muted: #4a5359;        /* Saturated muted gray for body text */
+  --text-light: #f3f5f6;        /* Light slate for text on dark backgrounds */
   --accent: #bfa17c;            /* Muted champagne gold accent */
   --accent-light: #d6be9e;      /* Muted light gold accent */
-  --border-color: #dbdbdb;      /* Thin line borders */
-  --border-color-dark: #3a3f47; /* Thin line borders for dark section */
-  --shadow-sm: 0 4px 20px rgba(0,0,0,0.03);
-  --shadow-md: 0 10px 30px rgba(0,0,0,0.06);
-  --shadow-lg: 0 20px 40px rgba(0,0,0,0.1);
+  --border-color: #aeb9bf;      /* Darker border color to match */
+  --border-color-dark: #2f3a42; /* Borders for dark section */
+  --shadow-sm: 0 4px 20px rgba(23,30,36,0.06);
+  --shadow-md: 0 10px 30px rgba(23,30,36,0.08);
+  --shadow-lg: 0 20px 40px rgba(23,30,36,0.12);
   
   /* Fonts */
   --font-serif: 'Playfair Display', 'Noto Serif TC', Georgia, serif;
