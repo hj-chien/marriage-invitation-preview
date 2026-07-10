@@ -127,35 +127,112 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 5. Photo Lightbox Modal
+  // 5. Expandable Gallery Grid
+  // ==========================================
+  const galleryGrid = document.getElementById('gallery-grid');
+  const viewMoreBtn = document.getElementById('view-more-photos-btn');
+
+  if (viewMoreBtn && galleryGrid) {
+    viewMoreBtn.addEventListener('click', () => {
+      galleryGrid.classList.toggle('expanded');
+      if (galleryGrid.classList.contains('expanded')) {
+        viewMoreBtn.innerHTML = '✨ 收合部分婚紗相片';
+      } else {
+        viewMoreBtn.innerHTML = '✨ 展開更多婚紗相片';
+        // Scroll back to gallery title smoothly so user doesn't get lost
+        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+      }
+    });
+  }
+
+  // ==========================================
+  // 6. Photo Lightbox Slideshow Modal
   // ==========================================
   const lightbox = document.getElementById('lightbox');
   const lightboxImg = document.getElementById('lightbox-img');
   const lightboxClose = document.querySelector('.lightbox-close');
-  const galleryItems = document.querySelectorAll('.gallery-item');
+  const prevBtn = document.getElementById('lightbox-prev');
+  const nextBtn = document.getElementById('lightbox-next');
+  const counter = document.getElementById('lightbox-counter');
+  
+  // Collect all gallery images
+  const allPhotoElements = document.querySelectorAll('.gallery-card img');
+  const photoUrls = Array.from(allPhotoElements).map(img => img.src);
+  let currentPhotoIndex = 0;
 
-  galleryItems.forEach(item => {
-    item.addEventListener('click', () => {
-      // Extract the background-image URL
-      const bgImg = window.getComputedStyle(item).backgroundImage;
-      // Clean up the URL format (removes url("") wrapper)
-      const imgSrc = bgImg.replace(/^url\(["']?/, '').replace(/["']?\)$/, '');
-      
-      lightboxImg.src = imgSrc;
+  // Open Lightbox
+  allPhotoElements.forEach((imgEl, index) => {
+    imgEl.parentElement.addEventListener('click', () => {
+      currentPhotoIndex = index;
+      updateLightboxPhoto();
       lightbox.style.display = 'flex';
+      document.body.style.overflow = 'hidden'; // Lock background scroll
     });
   });
 
-  // Close Lightbox
-  lightboxClose.addEventListener('click', () => {
-    lightbox.style.display = 'none';
-  });
+  function updateLightboxPhoto() {
+    if (photoUrls.length > 0) {
+      lightboxImg.src = photoUrls[currentPhotoIndex];
+      counter.textContent = `${currentPhotoIndex + 1} / ${photoUrls.length}`;
+    }
+  }
 
-  lightbox.addEventListener('click', (e) => {
-    if (e.target === lightbox) {
-      lightbox.style.display = 'none';
+  function showNextPhoto() {
+    currentPhotoIndex = (currentPhotoIndex + 1) % photoUrls.length;
+    updateLightboxPhoto();
+  }
+
+  function showPrevPhoto() {
+    currentPhotoIndex = (currentPhotoIndex - 1 + photoUrls.length) % photoUrls.length;
+    updateLightboxPhoto();
+  }
+
+  // Navigation Event Listeners
+  if (nextBtn) nextBtn.addEventListener('click', (e) => { e.stopPropagation(); showNextPhoto(); });
+  if (prevBtn) prevBtn.addEventListener('click', (e) => { e.stopPropagation(); showPrevPhoto(); });
+
+  // Close Lightbox
+  const closeLightbox = () => {
+    lightbox.style.display = 'none';
+    document.body.style.overflow = ''; // Unlock scroll
+  };
+
+  if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
+  if (lightbox) {
+    lightbox.addEventListener('click', (e) => {
+      if (e.target === lightbox || e.target === lightboxClose) {
+        closeLightbox();
+      }
+    });
+  }
+
+  // Keyboard navigation
+  document.addEventListener('keydown', (e) => {
+    if (lightbox && lightbox.style.display === 'flex') {
+      if (e.key === 'ArrowRight') showNextPhoto();
+      if (e.key === 'ArrowLeft') showPrevPhoto();
+      if (e.key === 'Escape') closeLightbox();
     }
   });
+
+  // Mobile Swipe Gestures
+  let startX = 0;
+  let endX = 0;
+  if (lightbox) {
+    lightbox.addEventListener('touchstart', (e) => {
+      startX = e.touches[0].clientX;
+    }, { passive: true });
+    
+    lightbox.addEventListener('touchend', (e) => {
+      endX = e.changedTouches[0].clientX;
+      const threshold = 50;
+      if (startX - endX > threshold) {
+        showNextPhoto(); // Swipe left -> next
+      } else if (endX - startX > threshold) {
+        showPrevPhoto(); // Swipe right -> prev
+      }
+    }, { passive: true });
+  }
 
 
   // ==========================================

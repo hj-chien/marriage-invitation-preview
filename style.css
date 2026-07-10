@@ -1303,4 +1303,97 @@ body.has-texture .traffic-section p {
   }
 }
 
+/* ==========================================
+   🖼️ Expanded Gallery & Slideshow Controls
+   ========================================== */
+
+/* Hidden Card for Grid */
+.hidden-card {
+  display: none !important;
+}
+
+.gallery-grid.expanded .hidden-card {
+  display: block !important;
+}
+
+/* Lightbox Enhancements */
+.lightbox-prev,
+.lightbox-next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  font-size: 3rem;
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
+  z-index: 2005;
+  user-select: none;
+  font-family: Arial, sans-serif;
+  line-height: 1;
+  padding-bottom: 6px; /* center align the lsaquo/rsaquo vertically */
+}
+
+.lightbox-prev {
+  left: 30px;
+}
+
+.lightbox-next {
+  right: 30px;
+}
+
+.lightbox-prev:hover,
+.lightbox-next:hover {
+  background: var(--accent);
+  border-color: var(--accent);
+  box-shadow: 0 0 15px rgba(191, 161, 124, 0.4);
+}
+
+.lightbox-counter {
+  position: absolute;
+  bottom: 30px;
+  left: 50%;
+  transform: translateX(-50%);
+  color: rgba(255, 255, 255, 0.85);
+  font-family: var(--font-serif);
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  z-index: 2005;
+  background: rgba(23, 30, 36, 0.6);
+  padding: 8px 20px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(5px);
+}
+
+/* Adjust for Mobile View for Lightbox controls */
+@media (max-width: 768px) {
+  .lightbox-prev,
+  .lightbox-next {
+    width: 44px;
+    height: 44px;
+    font-size: 2rem;
+    padding-bottom: 4px;
+  }
+  .lightbox-prev {
+    left: 10px;
+  }
+  .lightbox-next {
+    right: 10px;
+  }
+  .lightbox-counter {
+    bottom: 20px;
+    font-size: 0.95rem;
+    padding: 6px 15px;
+  }
+}
+
+
 

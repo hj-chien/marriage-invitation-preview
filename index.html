@@ -127,7 +127,8 @@
 
       <!-- Photo Carousel/Grid -->
       <div class="gallery-container scroll-reveal">
-        <div class="gallery-grid">
+        <div class="gallery-grid" id="gallery-grid">
+          <!-- Initial 3 photos (visible) -->
           <div class="gallery-card">
             <img src="assets/images/gallery/photo1.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
             <div class="gallery-card-overlay">
@@ -146,6 +147,99 @@
               <span class="gallery-card-overlay-text">Together forever</span>
             </div>
           </div>
+          
+          <!-- Hidden remaining 14 photos -->
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/1C98C0DE-F1EB-4CD9-ACB3-D9A7E0B2897E.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">With all my heart</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/1F4D0750-FB43-400B-9E47-2E7CEA4F1B4D.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Sweet memories</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/30B573FE-4054-45B5-99EF-4E7D1F0D1CBD.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Walk with you</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/53CFF20E-0B8C-4ED1-BD1F-28EE45228C47.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Beautiful day</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/5AAEAF43-9C8A-479A-8C0D-63C7B324AFB6.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Perfect match</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/5B58DDD4-E229-4045-8860-75FFD6CAE8DB.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Unconditional love</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/61438C18-41B4-4CDC-8BC4-A630AB195DBB.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Joyful hearts</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/64A47B13-744A-48F6-AF22-47029DCF9FBF.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Lifetime companion</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/6B818099-23F5-4F95-A5C2-51C0D3A72D42.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Always together</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/91062FDC-F6FE-48B3-85FC-1026D47265B7.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Pure happiness</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/D277FBC5-3B13-4533-851B-0F316AC45ACB.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Endless love</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/DFDCCE85-30CD-4BC2-BBC9-504A70FD9F1D.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Dream come true</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/EF945CB5-A2CA-46F9-9615-F774F37B8453.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Blessings of love</span>
+            </div>
+          </div>
+          <div class="gallery-card hidden-card">
+            <img src="assets/images/gallery/F6D82261-CD90-409A-93BE-0EFA899F8EA8.jpg" alt="婚紗相簿" class="gallery-img" loading="lazy">
+            <div class="gallery-card-overlay">
+              <span class="gallery-card-overlay-text">Forever and always</span>
+            </div>
+          </div>
+        </div>
+        
+        <!-- View More Button -->
+        <div class="gallery-more-btn-wrapper" style="text-align: center; margin-top: 40px;">
+          <button id="view-more-photos-btn" class="btn btn-outline">
+            ✨ 展開更多婚紗相片
+          </button>
         </div>
       </div>
     </div>
@@ -277,7 +371,10 @@
   <!-- Lightbox Modal for Gallery Images -->
   <div id="lightbox" class="lightbox">
     <span class="lightbox-close">&times;</span>
+    <button class="lightbox-prev" id="lightbox-prev" aria-label="上一張">&lsaquo;</button>
     <img class="lightbox-content" id="lightbox-img" src="" alt="婚紗照放大圖">
+    <button class="lightbox-next" id="lightbox-next" aria-label="下一張">&rsaquo;</button>
+    <div class="lightbox-counter" id="lightbox-counter">1 / 17</div>
   </div>
 
   <!-- Style/Texture Switcher Widget -->
