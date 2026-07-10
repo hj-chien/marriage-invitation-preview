@@ -4,6 +4,14 @@
    ========================================== */
 
 @font-face {
+  font-family: 'JasonHandwriting';
+  src: url('assets/fonts/JasonHandwriting1-Regular.woff2') format('woff2');
+  font-weight: normal;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: 'DFPLingHui';
   src: url('assets/fonts/DFPLingHui.ttf') format('truetype'),
        url('assets/fonts/DFPLingHui.otf') format('opentype');
@@ -30,8 +38,8 @@
   --shadow-lg: 0 20px 40px rgba(23,30,36,0.12);
   
   /* Fonts */
-  --font-serif: 'DFPLingHui', 'Noto Serif TC', 'Playfair Display', Georgia, serif;
-  --font-sans: 'DFPLingHui', 'Noto Sans TC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'JasonHandwriting', 'DFPLingHui', 'Noto Serif TC', 'Playfair Display', Georgia, serif;
+  --font-sans: 'JasonHandwriting', 'DFPLingHui', 'Noto Sans TC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
   
   /* Layout */
   --container-width: 1100px;
