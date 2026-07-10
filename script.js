@@ -4,6 +4,13 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Disable automatic scroll restoration by the browser
+  if ('scrollRestoration' in history) {
+    history.scrollRestoration = 'manual';
+  }
+  // Force scroll to top immediately on load to prevent starting in a scrolled state
+  window.scrollTo(0, 0);
+
   // Lock body scrolling initially for envelope opening animation
   document.body.style.overflow = 'hidden';
 
@@ -25,6 +32,7 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(() => {
         envelopeOverlay.style.display = 'none';
         document.body.style.overflow = '';
+        window.scrollTo(0, 0); // Force scroll to top once envelope is gone
         
         // Dispatch scroll event to trigger ScrollReveal animations on the page
         window.dispatchEvent(new Event('scroll'));
