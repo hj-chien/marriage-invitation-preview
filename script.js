@@ -66,9 +66,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
 
   // ==========================================
-  // 3. Countdown Timer (Target: March 14, 2027 12:00:00)
+  // 3. Countdown Timer (Target: March 13, 2027 12:00:00)
   // ==========================================
-  const targetDateStr = '2027-03-14T12:00:00+08:00';
+  const targetDateStr = '2027-03-13T12:00:00+08:00';
   const targetDate = new Date(targetDateStr).getTime();
 
   function updateCountdown() {
