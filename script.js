@@ -4,58 +4,8 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
-  // ==========================================
-  // 1. Background Music Controller
-  // ==========================================
-  const music = document.getElementById('bg-music');
-  const musicBtn = document.getElementById('music-btn');
-  const iconPlay = musicBtn.querySelector('.icon-play');
-  const iconPause = musicBtn.querySelector('.icon-pause');
-  let isPlaying = false;
-
-  // Toggle Music Function
-  function toggleMusic() {
-    if (isPlaying) {
-      music.pause();
-      iconPlay.classList.remove('hidden');
-      iconPause.classList.add('hidden');
-      musicBtn.classList.remove('pulse');
-      isPlaying = false;
-    } else {
-      // Play audio
-      music.play().then(() => {
-        iconPlay.classList.add('hidden');
-        iconPause.classList.remove('hidden');
-        musicBtn.classList.add('pulse');
-        isPlaying = true;
-      }).catch(err => {
-        console.log("音訊播放被瀏覽器阻擋，需要使用者互動:", err);
-      });
-    }
-  }
-
-  musicBtn.addEventListener('click', toggleMusic);
-
   // Lock body scrolling initially for envelope opening animation
   document.body.style.overflow = 'hidden';
-
-  // Auto-play attempt on first user interaction (general fallback)
-  const startMusicOnInteraction = () => {
-    if (!isPlaying) {
-      toggleMusic();
-      removeInteractionListeners();
-    }
-  };
-
-  function removeInteractionListeners() {
-    document.removeEventListener('click', startMusicOnInteraction);
-    document.removeEventListener('scroll', startMusicOnInteraction);
-    document.removeEventListener('touchstart', startMusicOnInteraction);
-  }
-
-  document.addEventListener('click', startMusicOnInteraction);
-  document.addEventListener('scroll', startMusicOnInteraction);
-  document.addEventListener('touchstart', startMusicOnInteraction);
 
   // Envelope opening logic
   const envelopeOverlay = document.getElementById('envelope-overlay');
@@ -65,12 +15,6 @@ document.addEventListener('DOMContentLoaded', () => {
     envelopeSeal.addEventListener('click', (e) => {
       e.stopPropagation();
       envelopeOverlay.classList.add('open');
-      
-      // Play music directly on this seal click (satisfies user interaction rule)
-      if (!isPlaying) {
-        toggleMusic();
-      }
-      removeInteractionListeners();
       
       // Step 1: Wait for 3D unfold animation to play (1.5 seconds)
       setTimeout(() => {

@@ -167,57 +167,7 @@ img {
   fill: currentColor;
 }
 
-/* Music Control Button (Floating Glassmorphism) */
-.music-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 50px;
-  height: 50px;
-  border-radius: 50%;
-  border: 1px solid rgba(255, 255, 255, 0.3);
-  background: rgba(255, 255, 255, 0.25);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  box-shadow: var(--shadow-md);
-  cursor: pointer;
-  z-index: 999;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.3s ease;
-  color: var(--text-dark);
-}
 
-body.dark-gray-bg .music-btn,
-.dark-gray-bg .music-btn {
-  color: var(--text-light);
-  border-color: rgba(255, 255, 255, 0.1);
-  background: rgba(0, 0, 0, 0.3);
-}
-
-.music-btn:hover {
-  transform: scale(1.1);
-  background: var(--accent);
-  color: white;
-}
-
-.music-icon {
-  width: 20px;
-  height: 20px;
-  fill: currentColor;
-}
-
-/* Music pulsing animation when playing */
-@keyframes musicPulse {
-  0% { box-shadow: 0 0 0 0 rgba(191, 161, 124, 0.4); }
-  70% { box-shadow: 0 0 0 12px rgba(191, 161, 124, 0); }
-  100% { box-shadow: 0 0 0 0 rgba(191, 161, 124, 0); }
-}
-
-.music-btn.pulse {
-  animation: musicPulse 2s infinite;
-}
 
 /* Floating Glass Navigation */
 .glass-nav {
@@ -1218,13 +1168,7 @@ body.dark-gray-bg .section-desc-para,
     padding: 25px 20px;
   }
   
-  /* Music Btn adjustment due to bottom nav */
-  .music-btn {
-    bottom: 90px;
-    right: 20px;
-    width: 44px;
-    height: 44px;
-  }
+
 }
 
 /* ==========================================
@@ -1377,10 +1321,6 @@ body.bg-texture-ribbed .footer {
   .texture-switcher {
     bottom: 90px;
     left: 20px;
-  }
-  .music-btn {
-    bottom: 150px;
-    right: 20px;
   }
 }
 
