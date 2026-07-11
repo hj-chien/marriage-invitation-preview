@@ -300,8 +300,7 @@ img {
   display: block;
   margin-bottom: 15px;
   text-transform: uppercase;
-  color: var(--accent);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+  color: var(--accent); /* champagne gold */
 }
 
 .hero-title {
@@ -311,8 +310,7 @@ img {
   letter-spacing: 2px;
   margin-bottom: 15px;
   line-height: 1.15;
-  color: white;
-  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
+  color: var(--text-dark); /* dark charcoal slate */
 }
 
 .hero-date {
@@ -320,9 +318,8 @@ img {
   font-size: 1.2rem;
   letter-spacing: 4px;
   font-weight: 300;
-  color: rgba(255, 255, 255, 0.95);
+  color: var(--text-muted); /* muted dark gray */
   margin-bottom: 0;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-card-divider {
@@ -331,7 +328,6 @@ img {
   background: var(--accent);
   margin: 25px auto;
   opacity: 0.8;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.3);
 }
 
 .hero-invitation-subtitle {
@@ -343,7 +339,6 @@ img {
   text-transform: uppercase;
   display: block;
   margin-bottom: 5px;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-invitation-title {
@@ -353,7 +348,6 @@ img {
   margin-bottom: 20px;
   letter-spacing: 4px;
   font-weight: 400;
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
 }
 
 .hero-greeting p {
@@ -371,8 +365,7 @@ img {
   margin-top: 25px;
   margin-bottom: 30px;
   letter-spacing: 1.5px;
-  color: rgba(255, 255, 255, 0.95);
-  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.6);
+  color: var(--text-dark);
 }
 
 .hero-couple-signature span {

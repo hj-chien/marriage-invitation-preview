@@ -232,24 +232,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // ==========================================
   const wishForm = document.getElementById('wish-form');
   const wishBoard = document.getElementById('wish-board');
-  const STORAGE_KEY = 'wedding_wishes_gary_wendy';
+  const STORAGE_KEY = 'wedding_wishes_hungjie_rita';
 
   // Default Mock Wishes (to populate the board initially)
   const defaultWishes = [
     {
       name: '伴娘 小語',
-      wish: '恭喜 Wendy 和 Gary！看到你們修成正果真的超級感動 😭 要一直幸福快樂下去喔！百年好合！',
-      time: '2026/07/10 12:30'
+      wish: '恭喜 汝菁 和 宏杰！看到你們修成正果真的超級感動 😭 要一直幸福快樂下去喔！百年好合！',
+      time: '2027/03/13 12:30'
     },
     {
       name: '大學好友 阿吉',
-      wish: 'Gary 恭喜你娶得美人歸！兄弟們都為你高興！新婚快樂，早生貴子啊！哈哈！',
-      time: '2026/07/10 14:15'
+      wish: '宏杰 恭喜你娶得美人歸！兄弟們都為你高興！新婚快樂，早生貴子啊！哈哈！',
+      time: '2027/03/13 14:15'
     },
     {
       name: '新娘秘書 Emily',
-      wish: '祝福最美麗的 Wendy 和最帥氣的 Gary 新婚愉快！永浴愛河，恩愛一生！',
-      time: '2026/07/10 15:45'
+      wish: '祝福最美麗的 汝菁 和最帥氣的 宏杰 新婚愉快！永浴愛河，恩愛一生！',
+      time: '2027/03/13 15:45'
     }
   ];
 
