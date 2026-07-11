@@ -226,19 +226,23 @@ document.addEventListener('DOMContentLoaded', () => {
     }, { passive: true });
   }
 
-
   // ==========================================
-  // 6. Local Interactive Blessing Wall
+  // 6. Cloud Synced Blessing Wall (Google Sheets Integration)
   // ==========================================
   const wishForm = document.getElementById('wish-form');
   const wishBoard = document.getElementById('wish-board');
-  const STORAGE_KEY = 'wedding_wishes_hungjie_rita';
+  const refreshBtn = document.getElementById('refresh-wishes-btn');
+  const STORAGE_KEY = 'wedding_wishes_hungjie_rita_v2';
+  
+  // Set your deployed Google Apps Script Web App URL here!
+  // Leave empty to run in offline/local storage fallback mode.
+  const APPS_SCRIPT_URL = ''; 
 
-  // Default Mock Wishes (to populate the board initially)
+  // Default Mock Wishes (to populate the board initially if database is empty/offline)
   const defaultWishes = [
     {
       name: '伴娘 小語',
-      wish: '恭喜 汝菁 和 宏杰！看到你們修成正果真的超級感動 😭 要一直幸福快樂下去喔！百年好合！',
+      wish: '恭喜 張汝菁 和 簡宏杰！看到你們修成正果真的超級感動 😭 要一直幸福快樂下去喔！百年好合！',
       time: '2027/03/13 12:30'
     },
     {
@@ -253,20 +257,58 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   ];
 
-  // Helper to load wishes from localStorage
-  function loadWishes() {
+  // Helper to load wishes from localStorage (fallback cache)
+  function loadLocalWishes() {
     let stored = localStorage.getItem(STORAGE_KEY);
     if (!stored) {
-      // If no stored wishes, save defaults and return them
       localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultWishes));
       return defaultWishes;
     }
     return JSON.parse(stored);
   }
 
-  // Helper to render wishes on the wall
-  function renderWishes() {
-    const wishes = loadWishes();
+  // Load and render wishes from Google Sheet OR LocalStorage fallback
+  async function fetchAndRenderWishes() {
+    if (refreshBtn) refreshBtn.classList.add('spinning');
+    
+    let wishes = [];
+    
+    if (APPS_SCRIPT_URL && APPS_SCRIPT_URL.startsWith('http')) {
+      try {
+        const response = await fetch(APPS_SCRIPT_URL);
+        if (response.ok) {
+          wishes = await response.json();
+          // If Sheet is empty, fall back to default wishes
+          if (!wishes || wishes.length === 0) {
+            wishes = defaultWishes;
+          } else {
+            // Cache latest fetched wishes in localStorage
+            localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes));
+          }
+        } else {
+          console.warn("Failed to fetch wishes from Google Sheets, using cache");
+          wishes = loadLocalWishes();
+        }
+      } catch (err) {
+        console.warn("Error fetching wishes from Google Sheets, using cache:", err);
+        wishes = loadLocalWishes();
+      }
+    } else {
+      // Offline fallback mode
+      wishes = loadLocalWishes();
+    }
+    
+    renderWishesArray(wishes);
+    
+    if (refreshBtn) {
+      setTimeout(() => {
+        refreshBtn.classList.remove('spinning');
+      }, 600); // Keep spinning for at least 0.6s for feedback
+    }
+  }
+
+  // Helper to render any array of wishes
+  function renderWishesArray(wishes) {
     wishBoard.innerHTML = '';
     
     // Reverse display so the latest wish is always first
@@ -285,7 +327,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Handle Form Submission
-  wishForm.addEventListener('submit', (e) => {
+  wishForm.addEventListener('submit', async (e) => {
     e.preventDefault();
     
     const nameInput = document.getElementById('guest-name');
@@ -298,22 +340,28 @@ document.addEventListener('DOMContentLoaded', () => {
     };
 
     if (newWish.name && newWish.wish) {
-      const currentWishes = loadWishes();
-      currentWishes.push(newWish);
-      
-      // Limit to max 50 wishes to avoid localStorage filling up
-      if (currentWishes.length > 50) {
-        currentWishes.shift(); // Remove oldest
+      // 1. Optimistic Update (Immediate local display!)
+      let currentWishes = [];
+      if (APPS_SCRIPT_URL && APPS_SCRIPT_URL.startsWith('http')) {
+        try {
+          currentWishes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultWishes;
+        } catch(err) {
+          currentWishes = defaultWishes;
+        }
+      } else {
+        currentWishes = loadLocalWishes();
       }
-
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(currentWishes));
       
-      // Reset form
+      currentWishes.push(newWish);
+      if (currentWishes.length > 100) {
+        currentWishes.shift(); // Limit locally cached wishes to 100
+      }
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(currentWishes));
+      renderWishesArray(currentWishes);
+      
+      // Reset form immediately
       nameInput.value = '';
       wishInput.value = '';
-      
-      // Re-render board with animation
-      renderWishes();
       
       // Scroll to the top of the wish board so user can see their message
       const rect = wishBoard.getBoundingClientRect();
@@ -322,8 +370,29 @@ document.addEventListener('DOMContentLoaded', () => {
         top: rect.top + scrollTop - 120,
         behavior: 'smooth'
       });
+
+      // 2. Submit asynchronously to Google Sheet
+      if (APPS_SCRIPT_URL && APPS_SCRIPT_URL.startsWith('http')) {
+        try {
+          await fetch(APPS_SCRIPT_URL, {
+            method: 'POST',
+            mode: 'no-cors', // Bypasses preflight CORS pre-requests completely
+            body: JSON.stringify(newWish)
+          });
+          console.log("Successfully sent wish to Google Sheet");
+        } catch (err) {
+          console.error("Failed to send wish to Google Sheet:", err);
+        }
+      }
     }
   });
+
+  // Manual Refresh Click Handler
+  if (refreshBtn) {
+    refreshBtn.addEventListener('click', () => {
+      fetchAndRenderWishes();
+    });
+  }
 
   // Helper to format date-time
   function formatCurrentTime() {
@@ -346,9 +415,7 @@ document.addEventListener('DOMContentLoaded', () => {
       .replace(/'/g, '&#039;');
   }
 
-
-
   // Initial Load of Wish Board
-  renderWishes();
+  fetchAndRenderWishes();
 
 });

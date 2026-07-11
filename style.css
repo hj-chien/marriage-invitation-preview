@@ -1624,6 +1624,25 @@ body.has-texture .envelope-body {
   pointer-events: none;
 }
 
+/* Guestbook Refresh Button Styles */
+.refresh-btn:hover {
+  transform: scale(1.15);
+  color: var(--accent-light) !important;
+}
+
+.refresh-btn:active {
+  transform: scale(0.9);
+}
+
+.refresh-btn.spinning svg {
+  animation: spinIcon 0.8s linear infinite;
+}
+
+@keyframes spinIcon {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+}
+
 
 
 
