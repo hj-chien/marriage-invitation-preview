@@ -236,7 +236,7 @@ document.addEventListener('DOMContentLoaded', () => {
   
   // Set your deployed Google Apps Script Web App URL here!
   // Leave empty to run in offline/local storage fallback mode.
-  const APPS_SCRIPT_URL = ''; 
+  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyVymxSuIFdbkR4_jCT2wyI04CZhnHOaq6ba5m14WDt0cT_zGpHcKdEY8buwZuOPHJk/exec'; 
 
   // Default Mock Wishes (to populate the board initially if database is empty/offline)
   const defaultWishes = [

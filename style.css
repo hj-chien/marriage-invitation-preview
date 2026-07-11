@@ -21,21 +21,21 @@
 }
 
 :root {
-  /* Color Palette */
-  --bg-light: #d8dee3;          /* Darker, more saturated cool slate gray */
-  --bg-medium: #b0bbc2;         /* Saturated medium gray */
-  --bg-dark: #171e24;           /* Rich deep dark slate */
-  --bg-card: #ffffff;           /* Crisp white for cards */
-  --text-dark: #1b2226;         /* Deeper slate gray for text */
-  --text-muted: #4a5359;        /* Saturated muted gray for body text */
-  --text-light: #f3f5f6;        /* Light slate for text on dark backgrounds */
-  --accent: #bfa17c;            /* Muted champagne gold accent */
-  --accent-light: #d6be9e;      /* Muted light gold accent */
-  --border-color: #aeb9bf;      /* Darker border color to match */
-  --border-color-dark: #2f3a42; /* Borders for dark section */
-  --shadow-sm: 0 4px 20px rgba(23,30,36,0.06);
-  --shadow-md: 0 10px 30px rgba(23,30,36,0.08);
-  --shadow-lg: 0 20px 40px rgba(23,30,36,0.12);
+  /* Color Palette - Warm Cotton Paper & Rich Bronze Gold */
+  --bg-light: #f5f3ef;          /* Elegant warm watercolor cotton paper background */
+  --bg-medium: #e6e2da;         /* Soft neutral warm linen gray */
+  --bg-dark: #202b24;           /* Luxurious deep forest green-black for dark sections */
+  --bg-card: #ffffff;           /* Pure white for raised cards */
+  --text-dark: #2c2825;         /* Warm charcoal for clear, soft high-contrast reading */
+  --text-muted: #5e5852;        /* Warm muted gray-brown for body text */
+  --text-light: #eaeceb;        /* Light linen-gray for dark section texts */
+  --accent: #947545;            /* Deep rich bronze gold accent */
+  --accent-light: #b39b78;      /* Soft warm gold accent */
+  --border-color: #dcd8cf;      /* Linen border color matching the theme */
+  --border-color-dark: #37433c; /* Borders for dark forest section */
+  --shadow-sm: 0 4px 20px rgba(44,40,37,0.03);
+  --shadow-md: 0 12px 35px rgba(44,40,37,0.06);
+  --shadow-lg: 0 25px 50px rgba(44,40,37,0.09);
   
   /* Fonts */
   --font-serif: 'JasonHandwriting', 'DFPLingHui', 'Noto Serif TC', 'Playfair Display', Georgia, serif;
@@ -62,6 +62,8 @@ html {
 
 body {
   background-color: var(--bg-light);
+  background-image: linear-gradient(rgba(245, 243, 239, 0.94), rgba(245, 243, 239, 0.94)), url('assets/images/texture_linen.png');
+  background-attachment: fixed;
   color: var(--text-dark);
   font-family: var(--font-sans);
   line-height: 1.8;
@@ -125,39 +127,41 @@ img {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  padding: 12px 28px;
+  padding: 12px 30px;
   font-family: var(--font-sans);
   font-size: 0.9rem;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
   font-weight: 500;
-  border-radius: 4px;
+  border-radius: 30px; /* Modern elegant pill shape */
   cursor: pointer;
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
 }
 
 .btn-primary {
   background-color: var(--accent);
   color: #fff;
   border: 1px solid var(--accent);
+  box-shadow: 0 4px 15px rgba(148, 117, 69, 0.15);
 }
 
 .btn-primary:hover {
   background-color: var(--accent-light);
   border-color: var(--accent-light);
   transform: translateY(-2px);
-  box-shadow: 0 5px 15px rgba(191, 161, 124, 0.3);
+  box-shadow: 0 8px 25px rgba(148, 117, 69, 0.35);
 }
 
 .btn-outline {
   background-color: transparent;
-  color: var(--text-dark);
-  border: 1px solid var(--border-color);
+  color: var(--accent);
+  border: 1px solid var(--accent);
 }
 
 .btn-outline:hover {
-  border-color: var(--accent);
-  color: var(--accent);
+  background-color: var(--accent);
+  color: #fff;
   transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(148, 117, 69, 0.2);
 }
 
 .btn-icon {
@@ -527,12 +531,25 @@ img {
 /* Countdown Card */
 .countdown-card {
   background: var(--bg-card);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(148, 117, 69, 0.25);
   border-radius: 8px;
   padding: 40px;
   text-align: center;
   box-shadow: var(--shadow-sm);
   margin-top: 60px;
+  position: relative;
+}
+
+.countdown-card::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px dashed rgba(148, 117, 69, 0.15);
+  border-radius: 6px;
+  pointer-events: none;
 }
 
 .countdown-card-title {
@@ -609,8 +626,8 @@ img {
   position: relative;
   cursor: pointer;
   box-shadow: var(--shadow-md);
-  transition: all 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-  border: 1px solid var(--border-color-dark);
+  transition: all 0.5s cubic-bezier(0.165, 0.84, 0.44, 1);
+  border: 1px solid rgba(148, 117, 69, 0.25);
   background-color: rgba(255, 255, 255, 0.02);
 }
 
@@ -628,20 +645,29 @@ img {
   transform: translateY(25px) translateX(-15px);
 }
 
+.gallery-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-color: rgba(148, 117, 69, 0.55);
+}
+
 /* Hover transitions preserving staggered state */
 .gallery-card:nth-child(1):hover {
   transform: translateY(-8px) scale(1.01);
   box-shadow: var(--shadow-lg);
+  border-color: rgba(148, 117, 69, 0.55);
 }
 
 .gallery-card:nth-child(2):hover {
   transform: translateY(-33px) translateX(15px) scale(1.02);
   box-shadow: var(--shadow-lg);
+  border-color: rgba(148, 117, 69, 0.55);
 }
 
 .gallery-card:nth-child(3):hover {
   transform: translateY(17px) translateX(-15px) scale(1.02);
   box-shadow: var(--shadow-lg);
+  border-color: rgba(148, 117, 69, 0.55);
 }
 
 @media (max-width: 768px) {
@@ -725,17 +751,31 @@ img {
 
 .event-card {
   background-color: var(--bg-card);
-  border: 1px solid var(--border-color);
+  border: 1px solid rgba(148, 117, 69, 0.25);
   border-radius: 8px;
   padding: 50px 40px;
   text-align: center;
   box-shadow: var(--shadow-sm);
-  transition: all 0.4s ease;
+  transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+  position: relative;
+}
+
+.event-card::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px dashed rgba(148, 117, 69, 0.15);
+  border-radius: 6px;
+  pointer-events: none;
 }
 
 .event-card:hover {
   transform: translateY(-5px);
   box-shadow: var(--shadow-md);
+  border-color: rgba(148, 117, 69, 0.45);
 }
 
 .card-icon-wrapper {
@@ -826,12 +866,25 @@ body.dark-gray-bg .section-desc-para,
 
 .guestbook-form-card {
   background-color: rgba(255, 255, 255, 0.03);
-  border: 1px solid var(--border-color-dark);
+  border: 1px solid rgba(148, 117, 69, 0.35);
   border-radius: 8px;
   padding: 40px;
   box-shadow: var(--shadow-sm);
   margin-bottom: 50px;
   backdrop-filter: blur(5px);
+  position: relative;
+}
+
+.guestbook-form-card::after {
+  content: '';
+  position: absolute;
+  top: 8px;
+  left: 8px;
+  right: 8px;
+  bottom: 8px;
+  border: 1px dashed rgba(148, 117, 69, 0.15);
+  border-radius: 6px;
+  pointer-events: none;
 }
 
 .form-group {
@@ -881,19 +934,20 @@ body.dark-gray-bg .section-desc-para,
 }
 
 .wish-item {
-  background-color: rgba(255, 255, 255, 0.05);
-  border: 1px solid rgba(255, 255, 255, 0.08);
+  background-color: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(148, 117, 69, 0.2);
   border-radius: 8px;
   padding: 24px;
   box-shadow: var(--shadow-sm);
   position: relative;
-  transition: all 0.3s ease;
+  transition: all 0.3s cubic-bezier(0.165, 0.84, 0.44, 1);
   animation: scaleIn 0.5s ease-out forwards;
 }
 
 .wish-item:hover {
   transform: translateY(-3px);
-  background-color: rgba(255, 255, 255, 0.07);
+  border-color: rgba(148, 117, 69, 0.4);
+  background-color: rgba(255, 255, 255, 0.06);
 }
 
 @keyframes scaleIn {
@@ -1437,18 +1491,19 @@ body.has-texture .envelope-overlay {
   position: relative;
   width: 100%;
   height: 100%;
-  background: var(--bg-card); /* Card white background */
+  background: #2b3a32; /* Deep luxury forest green envelope pocket */
   border-radius: 8px;
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
+  box-shadow: 0 20px 50px rgba(16, 26, 20, 0.45);
   transform-style: preserve-3d;
   transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid rgba(148, 117, 69, 0.25);
 }
 
 body.has-texture .envelope {
-  background-image: url('assets/images/texture_grain.png');
+  background-image: url('assets/images/texture_linen.png');
   background-blend-mode: multiply;
-  box-shadow: 0 15px 35px rgba(23, 30, 36, 0.25);
-  border: 1px solid rgba(23, 30, 36, 0.1);
+  box-shadow: 0 15px 35px rgba(16, 26, 20, 0.35);
+  border: 1px solid rgba(148, 117, 69, 0.25);
 }
 
 /* Base style for Flaps */
@@ -1457,15 +1512,15 @@ body.has-texture .envelope {
   left: 0;
   width: 100%;
   height: 50%;
-  background: #c3b4a2; /* Warm kraft-paper look */
+  background: #2b3a32; /* Deep luxury forest green flaps */
   z-index: 5;
   transform-style: preserve-3d;
   transition: transform 1.2s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: inset 0 0 30px rgba(0, 0, 0, 0.08);
+  box-shadow: inset 0 0 40px rgba(0, 0, 0, 0.25);
 }
 
 body.has-texture .envelope-flap {
-  background: var(--accent); /* Match champagne gold */
+  background: #2b3a32;
 }
 
 /* Top Flap */
@@ -1590,8 +1645,8 @@ body.has-texture .envelope-body {
   transform: translate(-50%, -50%) scale(1);
   width: 72px;
   height: 72px;
-  background: radial-gradient(circle, #e6c594 0%, #bfa17c 100%);
-  border: 2px solid #dfc49c;
+  background: radial-gradient(circle, #c4a983 0%, #947545 100%);
+  border: 2px solid #bda88a;
   color: white;
   font-size: 2.2rem;
   border-radius: 50%;
@@ -1600,14 +1655,14 @@ body.has-texture .envelope-body {
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 8px 25px rgba(16, 26, 20, 0.4), inset 0 2px 4px rgba(255, 255, 255, 0.25), inset 0 -3px 6px rgba(0, 0, 0, 0.25);
   transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   outline: none;
 }
 
 .envelope-seal:hover {
   transform: translate(-50%, -50%) scale(1.08);
-  box-shadow: 0 10px 25px rgba(191, 161, 124, 0.5);
+  box-shadow: 0 12px 30px rgba(148, 117, 69, 0.45), inset 0 2px 4px rgba(255, 255, 255, 0.3), inset 0 -3px 6px rgba(0, 0, 0, 0.25);
 }
 
 .seal-icon {
