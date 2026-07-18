@@ -3,23 +3,6 @@
    Theme: Texture Muted Gray & Champagne Gold
    ========================================== */
 
-@font-face {
-  font-family: 'JasonHandwriting';
-  src: url('assets/fonts/JasonHandwriting1-Regular.woff2') format('woff2');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
-@font-face {
-  font-family: 'DFPLingHui';
-  src: url('assets/fonts/DFPLingHui.ttf') format('truetype'),
-       url('assets/fonts/DFPLingHui.otf') format('opentype');
-  font-weight: normal;
-  font-style: normal;
-  font-display: swap;
-}
-
 :root {
   /* Color Palette - Warm Cotton Paper & Rich Bronze Gold */
   --bg-light: #f5f3ef;          /* Elegant warm watercolor cotton paper background */
@@ -38,8 +21,8 @@
   --shadow-lg: 0 25px 50px rgba(44,40,37,0.09);
   
   /* Fonts */
-  --font-serif: 'JasonHandwriting', 'DFPLingHui', 'Noto Serif TC', 'Playfair Display', Georgia, serif;
-  --font-sans: 'JasonHandwriting', 'DFPLingHui', 'Noto Sans TC', 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-serif: 'Noto Serif TC', 'Playfair Display', Georgia, serif;
+  --font-sans: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
   
   /* Layout */
   --container-width: 1100px;
@@ -109,6 +92,39 @@ img {
   display: none !important;
 }
 
+.website-field {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  white-space: nowrap;
+}
+
+.turnstile-container {
+  min-height: 65px;
+  margin: 18px 0 4px;
+}
+
+.wish-status {
+  min-height: 1.8em;
+  margin: 10px 0 14px;
+  color: var(--text-muted);
+  font-size: 0.9rem;
+}
+
+.wish-status.is-success { color: #3c6e52; }
+.wish-status.is-error { color: #a24435; }
+
+.wish-empty {
+  grid-column: 1 / -1;
+  padding: 26px;
+  border: 1px dashed var(--border-color);
+  color: var(--text-muted);
+  text-align: center;
+}
+
 /* Scroll Animations */
 .scroll-reveal {
   opacity: 0;
@@ -149,6 +165,13 @@ img {
   border-color: var(--accent-light);
   transform: translateY(-2px);
   box-shadow: 0 8px 25px rgba(148, 117, 69, 0.35);
+}
+
+.btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.55;
+  transform: none;
+  box-shadow: none;
 }
 
 .btn-outline {
@@ -1701,7 +1724,5 @@ body.has-texture .envelope-body {
   from { transform: rotate(0deg); }
   to { transform: rotate(-360deg); }
 }
-
-
 
 

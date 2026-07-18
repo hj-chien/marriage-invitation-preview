@@ -227,195 +227,171 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ==========================================
-  // 6. Cloud Synced Blessing Wall (Google Sheets Integration)
+  // 6. Moderated Guestbook (Apps Script + Turnstile)
   // ==========================================
   const wishForm = document.getElementById('wish-form');
   const wishBoard = document.getElementById('wish-board');
   const refreshBtn = document.getElementById('refresh-wishes-btn');
-  const STORAGE_KEY = 'wedding_wishes_hungjie_rita_v2';
-  
-  // Set your deployed Google Apps Script Web App URL here!
-  // Leave empty to run in offline/local storage fallback mode.
-  const APPS_SCRIPT_URL = 'https://script.google.com/macros/s/AKfycbyVymxSuIFdbkR4_jCT2wyI04CZhnHOaq6ba5m14WDt0cT_zGpHcKdEY8buwZuOPHJk/exec'; 
+  const wishStatus = document.getElementById('wish-status');
+  const wishSubmitBtn = document.getElementById('wish-submit-btn');
+  const STORAGE_KEY = 'wedding_wishes_hungjie_rita_v3';
+  const GUESTBOOK_API = {
+    url: 'https://script.google.com/macros/s/AKfycbyVymxSuIFdbkR4_jCT2wyI04CZhnHOaq6ba5m14WDt0cT_zGpHcKdEY8buwZuOPHJk/exec',
+    // Set this after creating a Turnstile widget for the production domain.
+    turnstileSiteKey: ''
+  };
+  let turnstileToken = '';
+  let turnstileWidgetId = null;
 
-  // Default Mock Wishes (to populate the board initially if database is empty/offline)
-  const defaultWishes = [
-    {
-      name: '伴娘 小語',
-      wish: '恭喜 張汝菁 和 簡宏杰！看到你們修成正果真的超級感動 😭 要一直幸福快樂下去喔！百年好合！',
-      time: '2027/03/13 12:30'
-    },
-    {
-      name: '大學好友 阿吉',
-      wish: '宏杰 恭喜你娶得美人歸！兄弟們都為你高興！新婚快樂，早生貴子啊！哈哈！',
-      time: '2027/03/13 14:15'
-    },
-    {
-      name: '新娘秘書 Emily',
-      wish: '祝福最美麗的 汝菁 和最帥氣的 宏杰 新婚愉快！永浴愛河，恩愛一生！',
-      time: '2027/03/13 15:45'
-    }
-  ];
+  function setWishStatus(message = '', type = '') {
+    if (!wishStatus) return;
+    wishStatus.textContent = message;
+    wishStatus.className = `wish-status${type ? ` is-${type}` : ''}`;
+  }
 
-  // Helper to load wishes from localStorage (fallback cache)
+  function normaliseWish(item) {
+    if (!item || typeof item !== 'object') return null;
+    const name = String(item.name || '').trim().slice(0, 20);
+    const wish = String(item.wish || '').trim().slice(0, 150);
+    const time = String(item.time || '').trim().slice(0, 40);
+    return name && wish && time ? { name, wish, time } : null;
+  }
+
   function loadLocalWishes() {
-    let stored = localStorage.getItem(STORAGE_KEY);
-    if (!stored) {
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(defaultWishes));
-      return defaultWishes;
-    }
-    return JSON.parse(stored);
-  }
-
-  // Load and render wishes from Google Sheet OR LocalStorage fallback
-  async function fetchAndRenderWishes() {
-    if (refreshBtn) refreshBtn.classList.add('spinning');
-    
-    let wishes = [];
-    
-    if (APPS_SCRIPT_URL && APPS_SCRIPT_URL.startsWith('http')) {
-      try {
-        const response = await fetch(APPS_SCRIPT_URL);
-        if (response.ok) {
-          wishes = await response.json();
-          // If Sheet is empty, fall back to default wishes
-          if (!wishes || wishes.length === 0) {
-            wishes = defaultWishes;
-          } else {
-            // Cache latest fetched wishes in localStorage
-            localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes));
-          }
-        } else {
-          console.warn("Failed to fetch wishes from Google Sheets, using cache");
-          wishes = loadLocalWishes();
-        }
-      } catch (err) {
-        console.warn("Error fetching wishes from Google Sheets, using cache:", err);
-        wishes = loadLocalWishes();
-      }
-    } else {
-      // Offline fallback mode
-      wishes = loadLocalWishes();
-    }
-    
-    renderWishesArray(wishes);
-    
-    if (refreshBtn) {
-      setTimeout(() => {
-        refreshBtn.classList.remove('spinning');
-      }, 600); // Keep spinning for at least 0.6s for feedback
+    try {
+      const stored = JSON.parse(localStorage.getItem(STORAGE_KEY) || '[]');
+      return Array.isArray(stored) ? stored.map(normaliseWish).filter(Boolean) : [];
+    } catch (_) {
+      return [];
     }
   }
 
-  // Helper to render any array of wishes
+  function saveLocalWishes(wishes) {
+    localStorage.setItem(STORAGE_KEY, JSON.stringify(wishes.slice(-100)));
+  }
+
   function renderWishesArray(wishes) {
-    wishBoard.innerHTML = '';
-    
-    // Reverse display so the latest wish is always first
+    wishBoard.replaceChildren();
+    if (!wishes.length) {
+      const emptyMessage = document.createElement('p');
+      emptyMessage.className = 'wish-empty';
+      emptyMessage.textContent = '尚未有祝福，期待您的第一則留言。';
+      wishBoard.appendChild(emptyMessage);
+      return;
+    }
+
     wishes.slice().reverse().forEach(item => {
-      const card = document.createElement('div');
+      const card = document.createElement('article');
       card.className = 'wish-item';
-      card.innerHTML = `
-        <div class="wish-header">
-          <span class="wish-name">${escapeHTML(item.name)}</span>
-          <span class="wish-time">${item.time}</span>
-        </div>
-        <p class="wish-text">${escapeHTML(item.wish).replace(/\n/g, '<br>')}</p>
-      `;
+      const header = document.createElement('div');
+      header.className = 'wish-header';
+      const name = document.createElement('span');
+      name.className = 'wish-name';
+      name.textContent = item.name;
+      const time = document.createElement('time');
+      time.className = 'wish-time';
+      time.textContent = item.time;
+      const message = document.createElement('p');
+      message.className = 'wish-text';
+      message.textContent = item.wish;
+      header.append(name, time);
+      card.append(header, message);
       wishBoard.appendChild(card);
     });
   }
 
-  // Handle Form Submission
-  wishForm.addEventListener('submit', async (e) => {
-    e.preventDefault();
-    
-    const nameInput = document.getElementById('guest-name');
-    const wishInput = document.getElementById('guest-wish');
-    
-    const newWish = {
-      name: nameInput.value.trim(),
-      wish: wishInput.value.trim(),
-      time: formatCurrentTime()
-    };
-
-    if (newWish.name && newWish.wish) {
-      // 1. Optimistic Update (Immediate local display!)
-      let currentWishes = [];
-      if (APPS_SCRIPT_URL && APPS_SCRIPT_URL.startsWith('http')) {
-        try {
-          currentWishes = JSON.parse(localStorage.getItem(STORAGE_KEY)) || defaultWishes;
-        } catch(err) {
-          currentWishes = defaultWishes;
-        }
-      } else {
-        currentWishes = loadLocalWishes();
-      }
-      
-      currentWishes.push(newWish);
-      if (currentWishes.length > 100) {
-        currentWishes.shift(); // Limit locally cached wishes to 100
-      }
-      localStorage.setItem(STORAGE_KEY, JSON.stringify(currentWishes));
-      renderWishesArray(currentWishes);
-      
-      // Reset form immediately
-      nameInput.value = '';
-      wishInput.value = '';
-      
-      // Scroll to the top of the wish board so user can see their message
-      const rect = wishBoard.getBoundingClientRect();
-      const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
-      window.scrollTo({
-        top: rect.top + scrollTop - 120,
-        behavior: 'smooth'
-      });
-
-      // 2. Submit asynchronously to Google Sheet
-      if (APPS_SCRIPT_URL && APPS_SCRIPT_URL.startsWith('http')) {
-        try {
-          await fetch(APPS_SCRIPT_URL, {
-            method: 'POST',
-            mode: 'no-cors', // Bypasses preflight CORS pre-requests completely
-            body: JSON.stringify(newWish)
-          });
-          console.log("Successfully sent wish to Google Sheet");
-        } catch (err) {
-          console.error("Failed to send wish to Google Sheet:", err);
-        }
-      }
+  async function fetchAndRenderWishes() {
+    if (refreshBtn) refreshBtn.classList.add('spinning');
+    try {
+      const response = await fetch(GUESTBOOK_API.url, { cache: 'no-store' });
+      if (!response.ok) throw new Error('Unable to load wishes');
+      const payload = await response.json();
+      const wishes = (Array.isArray(payload) ? payload : payload.wishes || [])
+        .map(normaliseWish)
+        .filter(Boolean);
+      saveLocalWishes(wishes);
+      renderWishesArray(wishes);
+    } catch (error) {
+      renderWishesArray(loadLocalWishes());
+      setWishStatus('目前無法更新祝福牆，請稍後再試。', 'error');
+    } finally {
+      if (refreshBtn) refreshBtn.classList.remove('spinning');
     }
-  });
+  }
 
-  // Manual Refresh Click Handler
-  if (refreshBtn) {
-    refreshBtn.addEventListener('click', () => {
-      fetchAndRenderWishes();
+  function initialiseTurnstile() {
+    if (!GUESTBOOK_API.turnstileSiteKey) {
+      if (wishSubmitBtn) wishSubmitBtn.disabled = true;
+      setWishStatus('祝福牆驗證尚未啟用，暫時無法送出留言。', 'error');
+      return;
+    }
+    const script = document.createElement('script');
+    script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js?render=explicit';
+    script.async = true;
+    script.defer = true;
+    script.onload = () => {
+      turnstileWidgetId = window.turnstile.render('#turnstile-container', {
+        sitekey: GUESTBOOK_API.turnstileSiteKey,
+        action: 'guestbook',
+        callback: token => { turnstileToken = token; setWishStatus(); },
+        'expired-callback': () => { turnstileToken = ''; },
+        'error-callback': () => setWishStatus('驗證載入失敗，請重新整理後再試。', 'error')
+      });
+    };
+    document.head.appendChild(script);
+  }
+
+  if (wishForm) {
+    wishForm.addEventListener('submit', async event => {
+      event.preventDefault();
+      const nameInput = document.getElementById('guest-name');
+      const wishInput = document.getElementById('guest-wish');
+      const websiteInput = document.getElementById('guest-website');
+      const name = nameInput.value.trim();
+      const wish = wishInput.value.trim();
+
+      if (!name || !wish) {
+        setWishStatus('請填寫您的名字與祝福語。', 'error');
+        return;
+      }
+      if (!turnstileToken) {
+        setWishStatus('請先完成驗證後再送出。', 'error');
+        return;
+      }
+
+      wishSubmitBtn.disabled = true;
+      setWishStatus('正在送出祝福…');
+      try {
+        const response = await fetch(GUESTBOOK_API.url, {
+          method: 'POST',
+          headers: { 'Content-Type': 'text/plain;charset=UTF-8' },
+          body: JSON.stringify({ name, wish, website: websiteInput.value, turnstileToken })
+        });
+        const payload = await response.json();
+        if (!response.ok || !payload.ok || !normaliseWish(payload.wish)) {
+          throw new Error(payload.message || 'Unable to save wish');
+        }
+
+        const currentWishes = loadLocalWishes();
+        currentWishes.push(normaliseWish(payload.wish));
+        saveLocalWishes(currentWishes);
+        renderWishesArray(currentWishes);
+        nameInput.value = '';
+        wishInput.value = '';
+        turnstileToken = '';
+        if (window.turnstile && turnstileWidgetId !== null) window.turnstile.reset(turnstileWidgetId);
+        setWishStatus('已送出，謝謝您的祝福！', 'success');
+      } catch (error) {
+        setWishStatus('送出失敗，請確認驗證後再試。', 'error');
+      } finally {
+        wishSubmitBtn.disabled = false;
+      }
     });
   }
 
-  // Helper to format date-time
-  function formatCurrentTime() {
-    const now = new Date();
-    const year = now.getFullYear();
-    const month = String(now.getMonth() + 1).padStart(2, '0');
-    const date = String(now.getDate()).padStart(2, '0');
-    const hours = String(now.getHours()).padStart(2, '0');
-    const minutes = String(now.getMinutes()).padStart(2, '0');
-    return `${year}/${month}/${date} ${hours}:${minutes}`;
-  }
+  if (refreshBtn) refreshBtn.addEventListener('click', fetchAndRenderWishes);
 
-  // Helper to escape HTML characters (security best practice)
-  function escapeHTML(str) {
-    return str
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
-
-  // Initial Load of Wish Board
+  initialiseTurnstile();
   fetchAndRenderWishes();
 
 });
