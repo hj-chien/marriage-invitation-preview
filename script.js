@@ -127,12 +127,17 @@ document.addEventListener('DOMContentLoaded', () => {
   if (viewMoreBtn && galleryGrid) {
     viewMoreBtn.addEventListener('click', () => {
       galleryGrid.classList.toggle('expanded');
-      if (galleryGrid.classList.contains('expanded')) {
-        viewMoreBtn.innerHTML = '✨ 收合部分婚紗相片';
+      const isExpanded = galleryGrid.classList.contains('expanded');
+      viewMoreBtn.setAttribute('aria-expanded', String(isExpanded));
+      if (isExpanded) {
+        viewMoreBtn.textContent = '收合部分婚紗相片';
       } else {
-        viewMoreBtn.innerHTML = '✨ 展開更多婚紗相片';
-        // Scroll back to gallery title smoothly so user doesn't get lost
-        document.getElementById('gallery').scrollIntoView({ behavior: 'smooth' });
+        viewMoreBtn.textContent = '展開更多婚紗相片';
+        const gallery = document.getElementById('gallery');
+        if (gallery) {
+          const top = gallery.getBoundingClientRect().top + window.scrollY - 28;
+          window.scrollTo({ top, behavior: 'smooth' });
+        }
       }
     });
   }
@@ -151,14 +156,33 @@ document.addEventListener('DOMContentLoaded', () => {
   const allPhotoElements = document.querySelectorAll('.gallery-card img');
   const photoUrls = Array.from(allPhotoElements).map(img => img.src);
   let currentPhotoIndex = 0;
+  let previouslyFocusedElement = null;
+
+  function openLightbox(index, trigger) {
+    if (!lightbox || !lightboxImg) return;
+    currentPhotoIndex = index;
+    previouslyFocusedElement = trigger || document.activeElement;
+    updateLightboxPhoto();
+    lightbox.style.display = 'flex';
+    lightbox.setAttribute('aria-hidden', 'false');
+    document.body.style.overflow = 'hidden';
+    if (lightboxClose) lightboxClose.focus();
+  }
 
   // Open Lightbox
   allPhotoElements.forEach((imgEl, index) => {
-    imgEl.parentElement.addEventListener('click', () => {
-      currentPhotoIndex = index;
-      updateLightboxPhoto();
-      lightbox.style.display = 'flex';
-      document.body.style.overflow = 'hidden'; // Lock background scroll
+    const card = imgEl.parentElement;
+    card.setAttribute('role', 'button');
+    card.setAttribute('tabindex', '0');
+    card.setAttribute('aria-label', `開啟第 ${index + 1} 張婚紗照`);
+    card.addEventListener('click', () => {
+      openLightbox(index, card);
+    });
+    card.addEventListener('keydown', (event) => {
+      if (event.key === 'Enter' || event.key === ' ') {
+        event.preventDefault();
+        openLightbox(index, card);
+      }
     });
   });
 
@@ -185,8 +209,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   // Close Lightbox
   const closeLightbox = () => {
+    if (!lightbox) return;
     lightbox.style.display = 'none';
-    document.body.style.overflow = ''; // Unlock scroll
+    lightbox.setAttribute('aria-hidden', 'true');
+    document.body.style.overflow = '';
+    if (previouslyFocusedElement instanceof HTMLElement) previouslyFocusedElement.focus();
   };
 
   if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
@@ -204,6 +231,18 @@ document.addEventListener('DOMContentLoaded', () => {
       if (e.key === 'ArrowRight') showNextPhoto();
       if (e.key === 'ArrowLeft') showPrevPhoto();
       if (e.key === 'Escape') closeLightbox();
+      if (e.key === 'Tab') {
+        const controls = [lightboxClose, prevBtn, nextBtn].filter(Boolean);
+        if (!controls.length) return;
+        const currentIndex = controls.indexOf(document.activeElement);
+        if (e.shiftKey && (currentIndex <= 0)) {
+          e.preventDefault();
+          controls[controls.length - 1].focus();
+        } else if (!e.shiftKey && currentIndex === controls.length - 1) {
+          e.preventDefault();
+          controls[0].focus();
+        }
+      }
     }
   });
 
