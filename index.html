@@ -61,48 +61,37 @@
 
 
 
-  <!-- Floating Nav Bar -->
-  <nav class="glass-nav">
+  <!-- Paper Navigation -->
+  <nav class="glass-nav paper-nav" aria-label="喜帖導覽">
     <div class="nav-container">
-      <a href="#hero" class="nav-logo">H & R</a>
+      <a href="#hero" class="nav-logo" aria-label="回到喜帖首頁">H&nbsp;·&nbsp;R</a>
       <ul class="nav-links">
-        <li><a href="#hero">首頁</a></li>
-        <li><a href="#about">我們</a></li>
-        <li><a href="#gallery">婚紗相簿</a></li>
-        <li><a href="#event">時間地點</a></li>
-        <li><a href="#guestbook">祝賀牆</a></li>
+        <li><a href="#about">邀請</a></li>
+        <li><a href="#event">婚宴</a></li>
+        <li><a href="#gallery">相簿</a></li>
+        <li><a href="#guestbook">祝福</a></li>
       </ul>
     </div>
   </nav>
 
-  <!-- Section 1: Hero Cover -->
-  <header id="hero" class="hero-section">
-    <div class="hero-bg-blur" style="background-image: url('assets/images/cover/cover.png?v=6');"></div>
-    <div class="hero-bg" style="background-image: url('assets/images/cover/cover.png?v=6');"></div>
-    <div class="hero-overlay"></div>
-    <div class="hero-content fade-in">
-      
-      <!-- Key Cover Info directly on background -->
-      <span class="hero-subtitle">SAVE THE DATE</span>
-      <h1 class="hero-title">HungJie & Rita</h1>
-      <p class="hero-date">2027.03.13 | SATURDAY</p>
-      
-      <div class="hero-card-divider"></div>
-      
-      <span class="hero-invitation-subtitle">THE INVITATION</span>
-      <h2 class="hero-invitation-title">誠摯邀請</h2>
-      
-      <p class="hero-couple-signature">
-        新郎 <span>宏杰 HungJie</span> ＆ 新娘 <span>汝菁 Rita</span> 敬邀
-      </p>
-      
-      <!-- Scroll Down Indicator -->
-      <a href="#about" class="scroll-down-indicator" aria-label="向下捲動">
-        <svg class="chevron-down" viewBox="0 0 24 24">
-          <path d="M7.41 8.59L12 13.17l4.59-4.58L18 10l-6 6-6-6 1.41-1.41z"/>
-        </svg>
-      </a>
+  <!-- Section 1: Editorial Letter Cover -->
+  <header id="hero" class="hero-section letter-hero">
+    <div class="letter-hero-copy fade-in">
+      <p class="hero-kicker">A LETTER OF INVITATION</p>
+      <p class="hero-season">Spring · 2027</p>
+      <h1 class="hero-title">簡宏杰<br><em>＆</em> 張汝菁</h1>
+      <div class="hero-rule" aria-hidden="true"></div>
+      <p class="hero-invitation-title">誠摯邀請您<br>共享我們的幸福時刻</p>
+      <p class="hero-date">2027.03.13&nbsp;&nbsp;·&nbsp;&nbsp;SATURDAY</p>
+      <a href="#about" class="hero-read-link">展開這封信 <span aria-hidden="true">↓</span></a>
     </div>
+    <figure class="hero-portrait fade-in">
+      <div class="portrait-paper">
+        <img src="assets/images/editorial/newlyweds-portrait.jpg" alt="簡宏杰與張汝菁的手繪婚紗肖像">
+      </div>
+      <figcaption>HungJie &amp; Rita · 13 March 2027</figcaption>
+    </figure>
+    <p class="hero-side-note">WITH LOVE, WE BEGIN A NEW CHAPTER.</p>
   </header>
 
   <!-- Section 2: Dedicated Invitation Letter -->
