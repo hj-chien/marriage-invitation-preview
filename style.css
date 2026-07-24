@@ -29,6 +29,12 @@
   --container-narrow: 750px;
 }
 
+@font-face {
+  font-family: 'ChenYuluoyan';
+  src: url('assets/fonts/specimens/ChenYuluoyan-Specimen.ttf') format('truetype');
+  font-display: swap;
+}
+
 /* Reset & Base Styles */
 * {
   box-sizing: border-box;
@@ -2181,11 +2187,11 @@ body {
 .letter-hero .hero-title {
   max-width: 6.7em;
   color: var(--ink);
-  font-family: var(--font-heading);
+  font-family: 'ChenYuluoyan', var(--font-heading);
   font-size: var(--type-display);
   font-weight: 400;
-  letter-spacing: 0.09em;
-  line-height: 1.16;
+  letter-spacing: 0.12em;
+  line-height: 1.27;
 }
 .letter-hero .hero-title em {
   color: var(--clay);
@@ -2235,6 +2241,12 @@ body {
 .portrait-paper img { aspect-ratio: 0.735; filter: grayscale(1) contrast(1.07) brightness(1.03); }
 .hero-portrait figcaption { color: var(--ink-soft); font-size: 0.78rem; letter-spacing: 0.14em; margin: 18px 7px 0; }
 .hero-side-note { right: 23px; bottom: 78px; color: var(--moss); font-size: 0.69rem; letter-spacing: 0.21em; }
+
+.env-names {
+  font-family: 'ChenYuluoyan', var(--font-heading);
+  font-weight: 400;
+  letter-spacing: 0.12em;
+}
 
 .section { position: relative; padding: clamp(90px, 12vw, 160px) 0; }
 .about-section::before,
