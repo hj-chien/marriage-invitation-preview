@@ -7,8 +7,28 @@
   <title>春日信箋｜字體對照</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,ital,wght@6..96,400;6..96,500;6..96,600;6..96,400;6..96,500&family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Noto+Sans+TC:wght@300;400;500&family=Noto+Serif+TC:wght@300;400;500;600&display=swap" rel="stylesheet">
   <style>
+    @font-face {
+      font-family: 'ChenYuluoyan';
+      src: url('https://github.com/Chenyu-otf/chenyuluoyan_thin/releases/download/v2.0/ChenYuluoyan-2.0-Thin.ttf') format('truetype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'Iansui';
+      src: url('https://raw.githubusercontent.com/ButTaiwan/iansui/main/fonts/ttf/Iansui-Regular.ttf') format('truetype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'LXGWWenKaiTC';
+      src: url('https://github.com/lxgw/LxgwWenkaiTC/releases/download/v1.522/LXGWWenKaiTC-Regular.ttf') format('truetype');
+      font-display: swap;
+    }
+    @font-face {
+      font-family: 'OpenHuninn';
+      src: url('https://github.com/justfont/open-huninn-font/releases/download/v2.1/jf-openhuninn-2.1.ttf') format('truetype');
+      font-display: swap;
+    }
     :root {
       --paper: #f5f1e8;
       --paper-light: #fcfaf5;
@@ -125,21 +145,26 @@
     .sample-copy { max-width: 26em; margin: 0; color: var(--muted); font-size: .95rem; letter-spacing: .045em; line-height: 2; text-wrap: pretty; }
     .type-note { position: absolute; left: clamp(28px, 4vw, 54px); bottom: 25px; margin: 0; color: var(--muted); font-family: var(--sans); font-size: .66rem; letter-spacing: .08em; }
 
-    .spring .sample-name, .spring .sample-copy { font-family: var(--serif-tc); }
-    .spring .sample-name em, .spring .sample-date { font-family: 'Cormorant Garamond', serif; }
+    .luoyan .sample-name, .luoyan .sample-copy { font-family: 'ChenYuluoyan', var(--serif-tc); }
+    .luoyan .sample-name { font-size: clamp(2.75rem, 4.8vw, 4.7rem); font-weight: 400; letter-spacing: .12em; line-height: 1.33; }
+    .luoyan .sample-name em, .luoyan .sample-date { font-family: 'Cormorant Garamond', serif; }
+    .luoyan .sample-copy { font-size: 1.08rem; line-height: 2.05; }
 
-    .editorial .sample-name { font-family: var(--serif-tc); font-weight: 500; letter-spacing: .075em; }
-    .editorial .sample-name em, .editorial .sample-date { font-family: 'DM Serif Display', serif; }
-    .editorial .sample-copy { font-family: var(--serif-tc); }
+    .iansui .sample-name, .iansui .sample-copy { font-family: 'Iansui', var(--serif-tc); }
+    .iansui .sample-name { font-size: clamp(2.6rem, 4.6vw, 4.35rem); letter-spacing: .1em; line-height: 1.34; }
+    .iansui .sample-name em, .iansui .sample-date { font-family: 'Cormorant Garamond', serif; }
+    .iansui .sample-copy { font-size: 1.04rem; line-height: 2.02; }
 
-    .formal .sample-name { font-family: var(--serif-tc); font-weight: 400; letter-spacing: .14em; }
-    .formal .sample-name em, .formal .sample-date { font-family: 'Bodoni Moda', serif; }
-    .formal .sample-copy { font-family: var(--serif-tc); }
+    .wenkai .sample-name, .wenkai .sample-copy { font-family: 'LXGWWenKaiTC', var(--serif-tc); }
+    .wenkai .sample-name { font-size: clamp(2.5rem, 4.4vw, 4.15rem); letter-spacing: .1em; line-height: 1.32; }
+    .wenkai .sample-name em, .wenkai .sample-date { font-family: 'Cormorant Garamond', serif; }
+    .wenkai .sample-copy { font-size: 1.02rem; line-height: 2.05; }
 
-    .modern { background: #f8f8f2; }
-    .modern .sample-name { font-family: var(--serif-tc); font-weight: 400; }
-    .modern .sample-name em, .modern .sample-date { font-family: 'Cormorant Garamond', serif; }
-    .modern .sample-copy { font-family: var(--sans); font-size: .92rem; font-weight: 300; letter-spacing: .07em; }
+    .huninn { background: #f8f8f2; }
+    .huninn .sample-name, .huninn .sample-copy { font-family: 'OpenHuninn', var(--sans); }
+    .huninn .sample-name { font-size: clamp(2.38rem, 4.1vw, 3.85rem); letter-spacing: .08em; line-height: 1.34; }
+    .huninn .sample-name em, .huninn .sample-date { font-family: 'Cormorant Garamond', serif; }
+    .huninn .sample-copy { font-size: .96rem; letter-spacing: .065em; line-height: 2.05; }
 
     .footer-note { width: min(1180px, calc(100% - 48px)); margin: -74px auto 70px; color: var(--muted); font-size: .78rem; letter-spacing: .04em; }
     @media (max-width: 720px) {
@@ -154,52 +179,52 @@
 <body>
   <header class="page-header">
     <p class="eyebrow">TYPE SPECIMENS · SPRING LETTER</p>
-    <h1>以同一封邀請，選一種最像你們的語氣。</h1>
-    <p class="intro">四組皆以同樣的中文姓名、日期與邀請文字呈現。請特別比較姓名的份量、日期的性格，以及長句閱讀時的呼吸感。</p>
+    <h1>以同一封邀請，選一種最像你們筆跡的語氣。</h1>
+    <p class="intro">這次比較的是繁體中文的實際筆觸，而不是單純的襯線風格。請特別看姓名的個性，以及邀請文字在較長篇幅下是否仍然舒服易讀。</p>
   </header>
 
   <main class="specimen-grid">
-    <article class="specimen spring">
-      <p class="specimen-label"><span>A · 春日信箋</span><span>quiet &amp; warm</span></p>
+    <article class="specimen luoyan">
+      <p class="specimen-label"><span>A · 辰宇落雁體</span><span>poetic &amp; airy</span></p>
       <p class="sample-kicker">A LETTER OF INVITATION</p>
       <h2 class="sample-name">簡宏杰<br><em>＆</em> 張汝菁</h2>
       <div class="sample-rule"></div>
       <p class="sample-date">13 · MARCH · 2027</p>
       <p class="sample-copy">誠摯邀請您，共享我們的幸福時刻。讓這一日的相聚，成為往後想起時依然溫暖的一頁。</p>
-      <p class="type-note">Cormorant Garamond + Noto Serif TC</p>
+      <p class="type-note">細長筆跡 · 適合姓名與一句短短的邀請</p>
     </article>
 
-    <article class="specimen editorial">
-      <p class="specimen-label"><span>B · 精品雜誌</span><span>confident &amp; editorial</span></p>
+    <article class="specimen iansui">
+      <p class="specimen-label"><span>B · 芫荽</span><span>handwritten &amp; sincere</span></p>
       <p class="sample-kicker">A LETTER OF INVITATION</p>
       <h2 class="sample-name">簡宏杰<br><em>＆</em> 張汝菁</h2>
       <div class="sample-rule"></div>
       <p class="sample-date">13 · MARCH · 2027</p>
       <p class="sample-copy">誠摯邀請您，共享我們的幸福時刻。讓這一日的相聚，成為往後想起時依然溫暖的一頁。</p>
-      <p class="type-note">DM Serif Display + Noto Serif TC</p>
+      <p class="type-note">硬筆楷書感 · 親近而不過度可愛</p>
     </article>
 
-    <article class="specimen formal">
-      <p class="specimen-label"><span>C · 法式正式</span><span>formal &amp; ceremonial</span></p>
+    <article class="specimen wenkai">
+      <p class="specimen-label"><span>C · LXGW 文楷 TC</span><span>calm &amp; composed</span></p>
       <p class="sample-kicker">A LETTER OF INVITATION</p>
       <h2 class="sample-name">簡宏杰<br><em>＆</em> 張汝菁</h2>
       <div class="sample-rule"></div>
       <p class="sample-date">13 · MARCH · 2027</p>
       <p class="sample-copy">誠摯邀請您，共享我們的幸福時刻。讓這一日的相聚，成為往後想起時依然溫暖的一頁。</p>
-      <p class="type-note">Bodoni Moda + Noto Serif TC</p>
+      <p class="type-note">整齊硬筆感 · 最適合正文也長時間閱讀</p>
     </article>
 
-    <article class="specimen modern">
-      <p class="specimen-label"><span>D · 當代溫柔</span><span>clean &amp; intimate</span></p>
+    <article class="specimen huninn">
+      <p class="specimen-label"><span>D · jf open 粉圓</span><span>rounded &amp; joyful</span></p>
       <p class="sample-kicker">A LETTER OF INVITATION</p>
       <h2 class="sample-name">簡宏杰<br><em>＆</em> 張汝菁</h2>
       <div class="sample-rule"></div>
       <p class="sample-date">13 · MARCH · 2027</p>
       <p class="sample-copy">誠摯邀請您，共享我們的幸福時刻。讓這一日的相聚，成為往後想起時依然溫暖的一頁。</p>
-      <p class="type-note">Cormorant Garamond + Noto Sans TC</p>
+      <p class="type-note">圓潤手感 · 適合比較活潑、輕鬆的喜帖氣氛</p>
     </article>
   </main>
 
-  <p class="footer-note">提示：英文字體主要影響「＆、日期與英文小標」；所有繁體中文仍由對應的 Noto 字體負責，以確保清晰與完整支援。</p>
+  <p class="footer-note">提示：這四套均為可顯示繁體中文的實際字型。若選定其中一套，正式喜帖會只將它用在新人姓名或短句，正文仍保留易讀的 Noto Sans／Noto Serif。</p>
 </body>
 </html>
